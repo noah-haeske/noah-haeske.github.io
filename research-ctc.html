@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lateral Filter Array Microfluidics for Circulating Tumor Cell Isolation — Noah Haeske</title>
+<meta name="description" content="COMSOL modelling and fabrication of lateral filter array microfluidic devices for isolating circulating tumor cells. Interdisciplinary Microsystems Group, University of Florida.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="site-head__inner">
+    <a class="brand" href="index.html">Noah Haeske <span>Mechanical Engineering</span></a>
+    <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false">Menu</button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="index.html">About</a>
+      <a href="research.html" aria-current="page">Research</a>
+      <a href="projects.html">Projects</a>
+      <a href="coursework.html">Coursework</a>
+      <a href="resume.html">CV / Resume</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow"><a href="research.html" style="color:inherit;text-decoration:none;">&larr; Research</a> &nbsp;/&nbsp; Project 02</p>
+      <h1>Lateral Filter Array Microfluidics for Circulating Tumor Cell Isolation</h1>
+      <p class="lede">There are a handful of tumor cells in a tube of blood containing billions of everything else. Finding them is a separation problem, and the geometry of the channel is what does the separating.</p>
+    </div>
+  </section>
+
+  <!-- ============ REQUIRED PROJECT METADATA ============ -->
+  <div class="wrap">
+    <dl class="spec reveal">
+      <div><dt>Principal Investigator</dt><dd>Prof. Z. Hugh Fan</dd></div>
+      <div><dt>Institution</dt><dd>University of Florida</dd></div>
+      <div><dt>Department</dt><dd>Mechanical &amp; Aerospace Engineering</dd></div>
+      <div><dt>Group</dt><dd>Interdisciplinary Microsystems Group</dd></div>
+      <div><dt>Affiliation</dt><dd>Aug 2025 &ndash; present</dd></div>
+    </dl>
+  </div>
+
+  <!-- ============ FOCUS ============ -->
+  <section class="section" style="margin-top: clamp(2.5rem, 5vw, 3.5rem);">
+    <div class="wrap">
+      <div class="prose narrow reveal">
+        <h3>Research focus</h3>
+        <p>Circulating tumor cells are shed into the bloodstream by solid tumors, and capturing them from a routine blood draw offers a route to cancer diagnosis and monitoring that does not require a biopsy. The difficulty is abundance: the target cells are vanishingly rare against a background of red and white blood cells, so any capture method has to be both highly selective and gentle enough that the cells survive to be analysed.</p>
+        <p>The lateral filter array microfluidic device addresses this with geometry. A serpentine main channel carries the bulk of the sample while an array of side filters, sized between the diameters of a blood cell and a tumor cell, traps the larger cells off the main flow path. Because the filters sit lateral to the flow rather than across it, the device resists the clogging that limits conventional membrane filtration. My work concerns the relationship between that geometry and how well it actually captures &mdash; and pairs the physical separation with the chemistry that has to happen downstream.</p>
+
+        <h3>My responsibilities</h3>
+        <p>I built a COMSOL model of the microfilter array relating channel size and volumetric flow rate to capture efficiency, so that a device could be designed toward a target rather than found by iteration. I then fabricated and tested more than 200 microfluidic devices to validate that model, working through mask design, soft lithography, and fluorescence microscopy for readout, and cross-checking predicted against measured capture using clinical samples supplied by UF Health Shands Hospital.</p>
+        <p>Alongside the CTC work I am designing a low-cost platform for sequential reagent release using microfluidic ball valves. The goal is to run chemical lysis, RNA enrichment, and nucleic acid amplification as an ordered sequence inside a single device, enabling multiplexed detection of HIV, dengue, and Zika without an operator pipetting between steps. It is the same instinct as my work in London: replace a procedure that currently requires a trained hand with something the device does by itself.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MEDIA ============ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="eyebrow">Media</p>
+        <h2>The device and the data.</h2>
+      </div>
+
+      <figure class="fig reveal">
+        <img src="assets/img/ctc_device.jpg" alt="Lateral filter array microfluidic device filled with red dye on a glass slide, a penny beside it for scale">
+        <figcaption><b>Fig. 1</b> &nbsp;A lateral filter array device, dye-filled to make the channel network visible, with a penny for scale. The serpentine main channel carries the bulk of the sample; the fine comb structures branching off it are the filter arrays where larger cells are trapped off the flow path.</figcaption>
+      </figure>
+
+      <figure class="fig reveal">
+        <img src="assets/img/ctc_cells.jpg" alt="Fluorescence microscopy panels showing a captured cell positive for panCK and CSV-FITC and negative for CD45, alongside a CD45-positive leukocyte">
+        <figcaption><b>Fig. 2</b> &nbsp;Immunofluorescence readout distinguishing a captured tumor cell from a leukocyte. <b>A</b> is DAPI-positive and panCK/CSV-FITC-positive but CD45-negative &mdash; the signature of a circulating tumor cell. <b>B</b> is CD45-positive, identifying a white blood cell that made it through the filter. Deciding between these two on every captured object is what makes capture efficiency a number worth measuring.</figcaption>
+      </figure>
+
+      <figure class="fig reveal">
+        <img src="assets/img/ctc_ballvalve.jpg" alt="Diagram of the sequential reagent release platform: buffer wells with ball valves above a mixing unit and paper detection unit, plus the portable heater and microscope stand">
+        <figcaption><b>Fig. 3</b> &nbsp;The sequential reagent release platform. <b>a</b> Four buffer wells, each sealed by a bearing ball, sit above a mixing unit and a layered paper detection unit. <b>b</b> A pin displaces the ball and opens a gap, releasing one reagent at a time in a fixed order. <b>c</b> The portable reader: heater, integrated circuit, batteries, and a microscope on a 3D-printed stand, sized to run the assay away from a lab bench.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ METHODS ============ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="eyebrow">Methods &amp; tools</p>
+        <h2>What the work actually involves.</h2>
+      </div>
+      <dl class="spec reveal">
+        <div><dt>Modelling</dt><dd>COMSOL Multiphysics</dd></div>
+        <div><dt>Fabrication</dt><dd>Mask design, soft lithography</dd></div>
+        <div><dt>Readout</dt><dd>Fluorescence microscopy, ImageJ</dd></div>
+        <div><dt>Validation</dt><dd>Clinical samples, UF Health Shands</dd></div>
+      </dl>
+
+      <div class="prose narrow reveal" style="margin-top:2.4rem;">
+        <p>The volume of devices matters more than it might sound. A capture-efficiency model is only worth having if it survives contact with real fabrication variation, and the only way to know that is to build enough devices that the spread is visible. Two hundred devices is where the difference between a model that predicts and a model that describes started to become obvious.</p>
+      </div>
+
+      <div class="btn-row reveal" style="margin-top:2.4rem;">
+        <a class="btn btn--ghost" href="research-cassette.html">&larr; Previous project</a>
+        <a class="btn btn--ghost" href="projects.html">Engineering projects &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="eyebrow">Contact</p>
+        <h2>Questions about this project?</h2>
+      </div>
+      <dl class="contact-grid reveal">
+        <div><dt>Email</dt><dd><a href="mailto:noah.haeske@ufl.edu">noah.haeske@ufl.edu</a></dd></div>
+        <div><dt>Phone</dt><dd><a href="tel:+14077059895">407-705-9895</a></dd></div>
+        <div><dt>CV</dt><dd><a href="assets/docs/Noah_Haeske_Resume.pdf" download>Download PDF</a></dd></div>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap site-foot__inner">
+    <p class="fine">&copy; 2026 Noah Haeske &middot; University Scholars Program, University of Florida</p>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="mailto:noah.haeske@ufl.edu">noah.haeske@ufl.edu</a>
+      <a href="assets/docs/Noah_Haeske_Resume.pdf" download>CV</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

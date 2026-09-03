@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Noah Haeske — Mechanical Engineering Portfolio</title>
+<meta name="description" content="Noah Haeske, mechanical engineering student at the University of Florida. Microfluidics, point-of-care diagnostics, and passive thermal systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="site-head__inner">
+    <a class="brand" href="index.html">Noah Haeske <span>Mechanical Engineering</span></a>
+    <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false">Menu</button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="index.html" aria-current="page">About</a>
+      <a href="research.html">Research</a>
+      <a href="projects.html">Projects</a>
+      <a href="coursework.html">Coursework</a>
+      <a href="resume.html">CV / Resume</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div>
+        <p class="eyebrow">University of Florida &middot; B.S. Mechanical Engineering &middot; 2029</p>
+        <h1>Noah Haeske</h1>
+        <p class="hero__quote">Most of what I build has to work without a power supply, without a lab, and without a second chance.</p>
+        <div class="btn-row">
+          <a class="btn" href="research.html">See the research</a>
+          <a class="btn btn--ghost" href="assets/docs/Noah_Haeske_Resume.pdf" download>Download CV (PDF)</a>
+        </div>
+        <div class="hero__meta">
+          <span class="pill pill--accent">Microfluidics</span>
+          <span class="pill">Point-of-care diagnostics</span>
+          <span class="pill">Passive thermal systems</span>
+          <span class="pill">Test instrumentation</span>
+        </div>
+      </div>
+
+      <figure class="headshot">
+        <img src="assets/img/headshot.jpg" alt="Portrait of Noah Haeske" width="1000" height="1250">
+        <figcaption>Gainesville, FL</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= CURRENT SPEC STRIP ================= -->
+  <div class="wrap">
+    <dl class="spec reveal">
+      <div><dt>Program</dt><dd>B.S. Mechanical Engineering</dd></div>
+      <div><dt>Institution</dt><dd>University of Florida</dd></div>
+      <div><dt>Expected</dt><dd>May 2029 &middot; GPA 4.00</dd></div>
+      <div><dt>Research since</dt><dd>August 2025</dd></div>
+    </dl>
+  </div>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="section" style="margin-top: clamp(2.8rem, 6vw, 4.5rem);">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="eyebrow">About</p>
+        <h2>Taking the infrastructure out of the design.</h2>
+      </div>
+      <div class="prose narrow reveal">
+        <p>I am a second-year mechanical engineering student at the University of Florida. My work sits between microfluidics and instrumentation &mdash; devices small enough that surface tension sets the rules, built to run outside of a laboratory.</p>
+
+        <p>At UF's <a href="research-ctc.html">Interdisciplinary Microsystems Group</a> I fabricate and test microfluidic devices that isolate circulating tumor cells from patient blood, and I am developing a low-cost ball-valve platform for sequential reagent release. In the summer of 2026 I spent three months at Imperial College London on a <a href="research-cassette.html">point-of-care diagnostic cassette</a> that holds a DNA amplification reaction at temperature using only a salt hydration exotherm and a phase-change buffer: no heater, no controller, no battery. Outside the wet lab, I lead payload systems for Florida Rocket Lab's 2026&ndash;27 vehicle and built the test stand that instruments its cold flows.</p>
+
+        <p>What connects them is the same constraint. Strip out the supporting infrastructure and something else has to carry the load, usually a material property or a geometry. I would rather solve a problem with a phase change than with a controller, and most of the work is figuring out whether that is actually possible.</p>
+
+        <p>Away from engineering I am a technical diver and a wilderness trip leader. I spent 90 days in the Alaskan backcountry with NOLS and a summer working at depth on coral reef surveys in Roat&aacute;n. Both are the same lesson as the lab: plan for the failure mode you cannot walk back from.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RESEARCH INTERESTS ================= -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="eyebrow">Research interests</p>
+        <h2>Where I want to work next.</h2>
+      </div>
+      <div class="courses reveal">
+        <div class="course-group">
+          <h3>Infrastructure-free diagnostics</h3>
+          <p class="muted" style="font-size:.95rem;">Assays that run without power, cold chain, or trained operators &mdash; passive heating, passive timing, and readouts a non-technical user can trust.</p>
+        </div>
+        <div class="course-group">
+          <h3>Microfluidic cell separation</h3>
+          <p class="muted" style="font-size:.95rem;">Size- and affinity-based capture of rare cells, and the modelling that predicts capture efficiency from channel geometry before a wafer is ever exposed.</p>
+        </div>
+        <div class="course-group">
+          <h3>Passive thermal &amp; fluid control</h3>
+          <p class="muted" style="font-size:.95rem;">Phase-change buffering, exothermic chemistry, and sacrificial materials used as timing elements rather than as packaging.</p>
+        </div>
+        <div class="course-group">
+          <h3>Instrumentation &amp; data pipelines</h3>
+          <p class="muted" style="font-size:.95rem;">Multi-channel DAQ, thermocouple and pressure logging, and the Python tooling that turns a messy test campaign into something you can actually make a decision from.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FEATURED ================= -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="eyebrow">Selected work</p>
+        <h2>Three things I have spent real time on.</h2>
+      </div>
+      <div class="cards reveal">
+
+        <a class="card" href="research-cassette.html">
+          <div class="card__media"><img src="assets/img/cad_exploded.png" alt="Exploded CAD view of the diagnostic cassette assembly"></div>
+          <div class="card__body">
+            <p class="card__meta">Research &middot; Imperial College London</p>
+            <h3>Passive Thermal Control for an Infrastructure-Free Diagnostic Cassette</h3>
+            <p>Held a DNA amplification reaction at 37&ndash;42&nbsp;&deg;C for ~11 minutes with zero electrical input, using a salt exotherm buffered by a phase-change ring.</p>
+            <span class="card__more">Read the project &rarr;</span>
+          </div>
+        </a>
+
+        <a class="card" href="research-ctc.html">
+          <div class="card__media"><img src="assets/img/ctc_device.jpg" alt="Lateral filter array microfluidic device filled with red dye, next to a penny for scale"></div>
+          <div class="card__body">
+            <p class="card__meta">Research &middot; UF Interdisciplinary Microsystems Group</p>
+            <h3>Lateral Filter Array Microfluidics for Circulating Tumor Cell Isolation</h3>
+            <p>COMSOL model relating channel geometry and flow rate to capture efficiency, validated against 200+ fabricated devices and clinical samples from UF Health Shands.</p>
+            <span class="card__more">Read the project &rarr;</span>
+          </div>
+        </a>
+
+        <a class="card" href="projects.html">
+          <div class="card__media"><img src="assets/img/frl_teststand.jpg" alt="Cold flow test platform set up outdoors at night"></div>
+          <div class="card__body">
+            <p class="card__meta">Engineering &middot; Florida Rocket Lab</p>
+            <h3>Cold Flow Test Platform &amp; Payload Systems</h3>
+            <p>A vertical integration and cold flow stand logging 12 channels of pressure, thermal, and vibration data, plus the Python pipeline that makes the data readable.</p>
+            <span class="card__more">See projects &rarr;</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="eyebrow">Contact</p>
+        <h2>Get in touch.</h2>
+      </div>
+      <dl class="contact-grid reveal">
+        <div>
+          <dt>Email</dt>
+          <dd><a href="mailto:noah.haeske@ufl.edu">noah.haeske@ufl.edu</a></dd>
+        </div>
+        <div>
+          <dt>Phone</dt>
+          <dd><a href="tel:+14077059895">407-705-9895</a></dd>
+        </div>
+        <div>
+          <dt>Based in</dt>
+          <dd>Gainesville &amp; Orlando, Florida</dd>
+        </div>
+        <div>
+          <dt>CV</dt>
+          <dd><a href="assets/docs/Noah_Haeske_Resume.pdf" download>Download PDF</a></dd>
+        </div>
+        <!-- Add LinkedIn / GitHub here once you send me the URLs:
+        <div><dt>LinkedIn</dt><dd><a href="URL">linkedin.com/in/…</a></dd></div>
+        <div><dt>GitHub</dt><dd><a href="URL">github.com/…</a></dd></div>
+        -->
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap site-foot__inner">
+    <p class="fine">&copy; 2026 Noah Haeske &middot; University Scholars Program, University of Florida</p>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="mailto:noah.haeske@ufl.edu">noah.haeske@ufl.edu</a>
+      <a href="assets/docs/Noah_Haeske_Resume.pdf" download>CV</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
