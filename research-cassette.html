@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Passive Thermal Control for an Infrastructure-Free Diagnostic Cassette — Noah Haeske</title>
+<title>Passive Thermal Control for an Infrastructure-Free Diagnostic Cassette &middot; Noah Haeske</title>
 <meta name="description" content="A single-use point-of-care cassette holding an isothermal DNA amplification reaction at 37–42 °C with no electrical power. Güder Research Group, Imperial College London.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +33,7 @@
     <div class="wrap">
       <p class="eyebrow"><a href="research.html" style="color:inherit;text-decoration:none;">&larr; Research</a> &nbsp;/&nbsp; Project 01</p>
       <h1>Passive Thermal Control for an Infrastructure-Free Diagnostic Cassette</h1>
-      <p class="lede">Holding a DNA amplification reaction at temperature for twenty minutes normally takes a heater, a controller, and a power source &mdash; exactly the equipment a point-of-care test exists to eliminate. This one runs on a salt.</p>
+      <p class="lede">Holding a DNA amplification reaction at temperature for twenty minutes normally takes a heater, a controller, and a power source, which is exactly the equipment a point-of-care test exists to eliminate. This one runs on a salt.</p>
     </div>
   </section>
 
@@ -66,11 +66,11 @@
     <div class="wrap">
       <div class="prose narrow reveal">
         <h3>Research focus</h3>
-        <p>Isothermal DNA amplification is far more sensitive than a lateral flow assay on its own, but it requires holding a reaction at elevated temperature for roughly twenty minutes. In practice that means a heater, a controller, and a power source &mdash; the same laboratory infrastructure that a point-of-care test is meant to remove. The research question was whether a controlled thermal profile and a timed fluid transfer could both be produced from stored chemical energy and material properties alone, inside a disposable that a non-technical user activates with water.</p>
+        <p>Isothermal DNA amplification is far more sensitive than a lateral flow assay on its own, but it requires holding a reaction at elevated temperature for roughly twenty minutes. In practice that means a heater, a controller, and a power source: the same laboratory infrastructure that a point-of-care test is meant to remove. The research question was whether a controlled thermal profile and a timed fluid transfer could both be produced from stored chemical energy and material properties alone, inside a disposable that a non-technical user activates with water.</p>
         <p>The group's wider programme builds intelligent interfaces between chemical and biological systems and low-cost electronics, with a strong emphasis on manufacturable diagnostics for settings without reliable laboratory access. This project sat on the fully passive end of that spectrum: no electronics at all, with every function that would normally be handled by a circuit reassigned to a material.</p>
 
         <h3>My responsibilities</h3>
-        <p>I owned the thermal and timing subsystems end to end. I designed the cassette geometry in Fusion 360 and iterated the printed body through several revisions of the annular heating chamber, sizing the wall thickness and chamber volume against the reaction volume it had to heat. I built the characterization rig, sealing a thermocouple into the sample well so that runs reported reaction-volume temperature rather than the much friendlier chamber-wall temperature. I then designed and executed the parameter sweep &mdash; 49 combinations of phase-change material and magnesium chloride mass &mdash; logging every run and writing the Python and Matplotlib pipeline that reduced the raw traces to minutes-in-window.</p>
+        <p>I owned the thermal and timing subsystems end to end. I designed the cassette geometry in Fusion 360 and iterated the printed body through several revisions of the annular heating chamber, sizing the wall thickness and chamber volume against the reaction volume it had to heat. I built the characterization rig, sealing a thermocouple into the sample well so that runs reported reaction-volume temperature rather than the much friendlier chamber-wall temperature. I then designed and executed the parameter sweep across 49 combinations of phase-change material and magnesium chloride mass, logging every run and writing the Python and Matplotlib pipeline that reduced the raw traces to minutes-in-window.</p>
         <p>Separately I developed the passive timing valve: casting PVA membranes across a range of concentrations, cast volumes, and plasticizer additions, then screening them with a tracer dye on real lateral flow sample pads so that each run reported both when the membrane opened and how cleanly it failed. At the end of the placement I ran a limited end-to-end trial through the assembled cassette and confirmed product by gel electrophoresis.</p>
       </div>
     </div>
@@ -89,7 +89,7 @@
       </div>
 
       <ol class="steps reveal">
-        <li><b>Exothermic charge.</b> Water activation triggers an MgCl<sub>2</sub> hydration exotherm &mdash; high energy density and fast release, but an uncontrolled spike on its own.</li>
+        <li><b>Exothermic charge.</b> Water activation triggers an MgCl<sub>2</sub> hydration exotherm: high energy density and fast release, but an uncontrolled spike on its own.</li>
         <li><b>PCM buffer.</b> A phase-change ring absorbs the exotherm peak as latent heat, then returns it slowly on crystallization, converting a spike into a usable plateau.</li>
         <li><b>Sacrificial valve.</b> A PVA membrane swells and ruptures on a fixed timescale, releasing product to the strip only after amplification completes.</li>
       </ol>
