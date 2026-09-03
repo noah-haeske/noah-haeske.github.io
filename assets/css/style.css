@@ -383,6 +383,26 @@ figure { margin: 0; }
   .transcript .t-gr { width: 3.2rem; }
 }
 
+/* ---------- awards (compact) ---------- */
+.awards { list-style: none; margin: 0; padding: 0; }
+.awards li {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1.5rem;
+  padding: .6rem 0; border-bottom: 1px solid var(--line);
+}
+.awards li:last-child { border-bottom: 0; }
+.awards .aw-name { font-size: .96rem; font-weight: 500; }
+.awards .aw-org {
+  display: block; font-weight: 400; font-size: .84rem; color: var(--ink-2); margin-top: .12rem;
+}
+.awards .aw-year {
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; color: var(--faint);
+  white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+@media (max-width: 560px) {
+  .awards li { flex-direction: column; gap: .2rem; }
+  .awards .aw-year { order: -1; }
+}
+
 /* visible keyboard focus everywhere */
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
