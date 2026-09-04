@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Page Editor &middot; Noah Haeske</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --e-bg: #17131a;
+    --e-panel: #211c25;
+    --e-line: #352e3a;
+    --e-ink: #f2eef0;
+    --e-ink-2: #a79fac;
+    --e-accent: #ff5c8a;
+    --e-ok: #4ec98d;
+    --e-warn: #f0b840;
+    --e-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --e-sans: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  * , *::before, *::after { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; background: var(--e-bg); color: var(--e-ink);
+    font-family: var(--e-sans); font-size: 14px;
+    display: grid; grid-template-rows: auto 1fr;
+  }
+
+  /* ---------- toolbar ---------- */
+  .bar {
+    display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
+    padding: .6rem .9rem; background: var(--e-panel);
+    border-bottom: 1px solid var(--e-line); position: sticky; top: 0; z-index: 10;
+  }
+  .bar .title {
+    font-family: var(--e-mono); font-size: .7rem; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--e-ink-2); margin-right: .3rem;
+  }
+  button {
+    font: inherit; font-size: .82rem; font-weight: 500; color: var(--e-ink);
+    background: #2f2834; border: 1px solid var(--e-line); border-radius: 5px;
+    padding: .4rem .8rem; cursor: pointer;
+  }
+  button:hover:not(:disabled) { border-color: #4d4454; background: #382f3e; }
+  button:disabled { opacity: .38; cursor: default; }
+  button.primary { background: var(--e-accent); border-color: var(--e-accent); color: #2b0413; font-weight: 600; }
+  button.primary:hover:not(:disabled) { background: #ff7ba1; border-color: #ff7ba1; }
+  select {
+    font: inherit; font-size: .82rem; color: var(--e-ink); background: #2f2834;
+    border: 1px solid var(--e-line); border-radius: 5px; padding: .4rem .6rem; max-width: 15rem;
+  }
+  .spacer { flex: 1 1 auto; }
+  .status { font-family: var(--e-mono); font-size: .72rem; letter-spacing: .04em; color: var(--e-ink-2); }
+  .status.dirty { color: var(--e-warn); }
+  .status.saved { color: var(--e-ok); }
+  .status.error { color: var(--e-accent); }
+  kbd {
+    font-family: var(--e-mono); font-size: .68rem; background: #2f2834;
+    border: 1px solid var(--e-line); border-bottom-width: 2px; border-radius: 3px; padding: .05rem .3rem;
+  }
+
+  /* ---------- stage ---------- */
+  .stage { overflow: auto; background: #0f0c11; }
+  .intro {
+    max-width: 40rem; margin: 0 auto; padding: 4rem 1.5rem; line-height: 1.65; color: var(--e-ink-2);
+  }
+  .intro h1 { color: var(--e-ink); font-size: 1.5rem; margin: 0 0 .4rem; font-weight: 600; }
+  .intro h2 {
+    font-family: var(--e-mono); font-size: .7rem; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--e-ink-2); margin: 2.2rem 0 .7rem; font-weight: 500;
+  }
+  .intro ol { padding-left: 1.2rem; margin: 0; }
+  .intro li { margin-bottom: .5rem; }
+  .intro code {
+    font-family: var(--e-mono); font-size: .85em; background: #211c25;
+    border: 1px solid var(--e-line); border-radius: 3px; padding: .1rem .35rem;
+  }
+  .intro .note { border-left: 2px solid var(--e-line); padding-left: 1rem; font-size: .9rem; margin-top: 2rem; }
+  .intro .big { margin-top: 1.8rem; }
+
+  /* the rendered page lives in a shadow root on this host */
+  #host { display: block; background: #fff; min-height: 100%; }
+
+  .msg {
+    max-width: 40rem; margin: 3rem auto; padding: 1rem 1.2rem; line-height: 1.6;
+    border: 1px solid var(--e-line); border-left: 3px solid var(--e-accent);
+    border-radius: 4px; background: var(--e-panel); color: var(--e-ink-2);
+  }
+  .msg strong { color: var(--e-ink); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <span class="title">Editor</span>
+  <button id="pick">Choose site folder…</button>
+  <select id="pages" disabled><option>No folder chosen</option></select>
+  <button id="save" class="primary" disabled>Save</button>
+  <button id="revert" disabled>Discard changes</button>
+  <span class="spacer"></span>
+  <span class="status" id="status">Pick your repo folder to begin</span>
+</div>
+
+<div class="stage" id="stage">
+  <div class="intro">
+    <h1>Edit your site in place.</h1>
+    <p>Click <strong>Choose site folder…</strong> and pick the <code>noah-haeske.github.io</code> folder. Chrome will ask permission to edit files in it — that permission lasts for this tab only.</p>
+
+    <h2>How it works</h2>
+    <ol>
+      <li>Pick a page from the dropdown. It renders exactly as it looks live.</li>
+      <li>Click any text and type. Editable text glows on hover.</li>
+      <li>Hit <strong>Save</strong> (or <kbd>Ctrl</kbd>+<kbd>S</kbd>). It writes straight to the real <code>.html</code> file.</li>
+      <li>Open GitHub Desktop, commit, push.</li>
+    </ol>
+
+    <h2>What it will and won't do</h2>
+    <p>It edits <em>text</em>: headings, paragraphs, course titles, link labels, table cells. It never touches your markup, so the layout can't break.</p>
+    <p>It won't add new sections, move things around, insert images, or change styling. That's still a job for me or a text editor.</p>
+
+    <div class="note">
+      Links inside the page are live — click one and the editor jumps to that page, so you can browse the site the way a visitor would. If you have unsaved edits it'll stop and ask first.
+    </div>
+    <p class="note">Chrome or Edge only. Firefox and Safari don't support writing to local files from a web page.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var dirHandle = null;      // FileSystemDirectoryHandle for the site folder
+  var pageName = null;       // e.g. "index.html"
+  var srcText = '';          // raw file text, untouched
+  var runs = [];             // {start,end,text} source text runs, in document order
+  var spans = [];            // wrapper spans in the shadow DOM, same order
+  var changes = {};          // idx -> new text
+  var assetURLs = [];        // object URLs to revoke on teardown
+  var shadow = null;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var elPick = $('pick'), elPages = $('pages'), elSave = $('save'),
+      elRevert = $('revert'), elStatus = $('status'), elStage = $('stage');
+
+  function setStatus(text, cls) {
+    elStatus.textContent = text;
+    elStatus.className = 'status' + (cls ? ' ' + cls : '');
+  }
+
+  function dirty() { return Object.keys(changes).length > 0; }
+
+  function syncButtons() {
+    var d = dirty();
+    elSave.disabled = !d;
+    elRevert.disabled = !d;
+    if (d) setStatus(Object.keys(changes).length + ' unsaved edit' + (Object.keys(changes).length === 1 ? '' : 's'), 'dirty');
+  }
+
+  function showMessage(html) {
+    elStage.innerHTML = '<div class="msg">' + html + '</div>';
+  }
+
+  // ---------------------------------------------------------------- source scan
+  // Walk the raw HTML and collect every run of text that sits outside a tag,
+  // skipping comments and the contents of <script>/<style>. Quotes inside tags
+  // are respected so an attribute containing ">" can't derail the scanner.
+  function scanTextRuns(src) {
+    var out = [], i = 0, n = src.length;
+    while (i < n) {
+      if (src.charAt(i) === '<') {
+        if (src.substr(i, 4) === '<!--') {
+          var ce = src.indexOf('-->', i);
+          i = ce === -1 ? n : ce + 3;
+          continue;
+        }
+        var raw = /^<\s*(script|style)\b/i.exec(src.substr(i, 24));
+        var tagEnd = skipTag(src, i);
+        if (raw) {
+          var close = new RegExp('<\\s*\\/\\s*' + raw[1] + '\\s*>', 'i');
+          var m = close.exec(src.slice(tagEnd));
+          i = m ? tagEnd + m.index + m[0].length : n;
+          continue;
+        }
+        i = tagEnd;
+        continue;
+      }
+      var start = i;
+      while (i < n && src.charAt(i) !== '<') i++;
+      var text = src.slice(start, i);
+      if (text.trim().length) out.push({ start: start, end: i, text: text });
+    }
+    return out;
+  }
+
+  // Return the index just past the ">" that closes the tag starting at i.
+  function skipTag(src, i) {
+    var n = src.length, q = null;
+    for (var j = i + 1; j < n; j++) {
+      var c = src.charAt(j);
+      if (q) { if (c === q) q = null; continue; }
+      if (c === '"' || c === "'") { q = c; continue; }
+      if (c === '>') return j + 1;
+    }
+    return n;
+  }
+
+  // ---------------------------------------------------------------- DOM scan
+  // Same ordering rule, applied to the parsed document, so run[k] and node[k]
+  // describe the same piece of text.
+  function collectTextNodes(root, doc) {
+    var out = [];
+    var walker = doc.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+    var node;
+    while ((node = walker.nextNode())) {
+      var p = node.parentNode;
+      if (!p) continue;
+      var tag = p.nodeName.toLowerCase();
+      if (tag === 'script' || tag === 'style') continue;
+      if (!node.nodeValue || !node.nodeValue.trim().length) continue;
+      out.push(node);
+    }
+    return out;
+  }
+
+  var decoder = document.createElement('textarea');
+  function decodeEntities(s) {
+    decoder.innerHTML = s;
+    return decoder.value;
+  }
+
+  function escapeText(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // ---------------------------------------------------------------- assets
+  async function fileFromPath(path) {
+    var parts = path.replace(/^\.?\//, '').split('/');
+    var dir = dirHandle;
+    for (var i = 0; i < parts.length - 1; i++) {
+      dir = await dir.getDirectoryHandle(parts[i]);
+    }
+    var fh = await dir.getFileHandle(parts[parts.length - 1]);
+    return await fh.getFile();
+  }
+
+  async function readTextAsset(path) {
+    try { return await (await fileFromPath(path)).text(); }
+    catch (e) { return null; }
+  }
+
+  async function objectURLFor(path) {
+    try {
+      var url = URL.createObjectURL(await fileFromPath(path));
+      assetURLs.push(url);
+      return url;
+    } catch (e) { return null; }
+  }
+
+  function isLocal(url) {
+    return url && !/^(https?:|data:|mailto:|tel:|#|blob:)/i.test(url);
+  }
+
+  // Rewrite the site stylesheet so it still applies inside a shadow root.
+  function adaptCSS(css) {
+    return css
+      .replace(/(^|\})\s*:root\b/g, '$1 :host')
+      .replace(/(^|\})\s*html\s*\{/g, '$1 :host {')
+      .replace(/(^|\})\s*body\s*\{/g, '$1 .doc-body {')
+      // scroll-reveal starts hidden and is switched on by main.js, which we
+      // don't run here — show everything instead.
+      .replace(/\.reveal\s*\{[^}]*\}/g, '.reveal { opacity: 1; transform: none; }');
+  }
+
+  var EDIT_CSS = [
+    '.doc-body { margin: 0; }',
+    '[data-edit] { border-radius: 2px; transition: background .12s ease, box-shadow .12s ease; }',
+    '[data-edit]:hover { background: rgba(176,23,63,.09); box-shadow: 0 0 0 3px rgba(176,23,63,.09); }',
+    '[data-edit]:focus { outline: none; background: rgba(176,23,63,.14); box-shadow: 0 0 0 3px rgba(176,23,63,.22); }',
+    '[data-edit].changed { background: rgba(240,184,64,.20); box-shadow: 0 0 0 3px rgba(240,184,64,.20); }'
+  ].join('\n');
+
+  // ---------------------------------------------------------------- render
+  async function loadPage(name) {
+    if (dirty() && !confirm('You have unsaved edits on ' + pageName + '. Leave without saving?')) {
+      elPages.value = pageName;
+      return;
+    }
+    teardown();
+    pageName = name;
+    elPages.value = name;
+
+    var fh = await dirHandle.getFileHandle(name);
+    srcText = await (await fh.getFile()).text();
+
+    var doc = new DOMParser().parseFromString(srcText, 'text/html');
+    runs = scanTextRuns(srcText);
+    var nodes = collectTextNodes(doc.documentElement, doc);
+
+    // Safety gate: if the two scans disagree, editing could corrupt the file.
+    if (nodes.length !== runs.length) {
+      showMessage('<strong>Cannot edit this page safely.</strong> The source scan found ' +
+        runs.length + ' text runs but the parsed document has ' + nodes.length +
+        '. That mismatch means an edit might land in the wrong place, so saving is disabled. ' +
+        'Ask Claude to take a look at <code>' + name + '</code>.');
+      elSave.disabled = true;
+      setStatus('Editing disabled for this page', 'error');
+      return;
+    }
+    var mismatches = 0;
+    for (var k = 0; k < runs.length; k++) {
+      if (decodeEntities(runs[k].text).trim() !== nodes[k].nodeValue.trim()) mismatches++;
+    }
+    if (mismatches > 0) {
+      showMessage('<strong>Cannot edit this page safely.</strong> ' + mismatches +
+        ' text run(s) in the file don\'t line up with the parsed page. Saving is disabled ' +
+        'so nothing gets written to the wrong spot. Ask Claude to look at <code>' + name + '</code>.');
+      elSave.disabled = true;
+      setStatus('Editing disabled for this page', 'error');
+      return;
+    }
+
+    // Wrap each body text node in an editable span. Wrapping the text node
+    // itself (rather than its parent) means an edit can only ever replace that
+    // one run — sibling elements, links and markup are untouchable.
+    var body = doc.body;
+    for (var i = 0; i < nodes.length; i++) {
+      var node = nodes[i];
+      if (!body.contains(node)) continue;          // <title> etc: indexed, not editable
+      var span = doc.createElement('span');
+      span.setAttribute('data-edit', String(i));
+      span.setAttribute('contenteditable', 'plaintext-only');
+      span.setAttribute('spellcheck', 'true');
+      node.parentNode.replaceChild(span, node);
+      span.appendChild(node);
+    }
+
+    // Inline the stylesheet, swap local asset paths for blob URLs, drop scripts.
+    var css = '';
+    var links = doc.querySelectorAll('link[rel="stylesheet"]');
+    for (var l = 0; l < links.length; l++) {
+      var href = links[l].getAttribute('href');
+      if (isLocal(href)) {
+        var text = await readTextAsset(href);
+        if (text) css += adaptCSS(text) + '\n';
+        links[l].remove();
+      }
+    }
+    var media = doc.querySelectorAll('img[src], source[src], video[src], video[poster]');
+    for (var m = 0; m < media.length; m++) {
+      var el = media[m];
+      for (var attr of ['src', 'poster']) {
+        var v = el.getAttribute(attr);
+        if (isLocal(v)) {
+          var u = await objectURLFor(v);
+          if (u) el.setAttribute(attr, u); else el.removeAttribute(attr);
+        }
+      }
+    }
+    var scripts = doc.querySelectorAll('script');
+    for (var s = 0; s < scripts.length; s++) scripts[s].remove();
+
+    // Mount into a shadow root so the site's CSS can't leak into the toolbar.
+    elStage.innerHTML = '<div id="host"></div>';
+    var host = document.getElementById('host');
+    shadow = host.attachShadow({ mode: 'open' });
+    var styleEl = document.createElement('style');
+    styleEl.textContent = css + '\n' + EDIT_CSS;
+    var wrap = document.createElement('div');
+    wrap.className = 'doc-body';
+    wrap.innerHTML = doc.body.innerHTML;
+    shadow.appendChild(styleEl);
+    shadow.appendChild(wrap);
+
+    spans = Array.prototype.slice.call(shadow.querySelectorAll('[data-edit]'));
+    spans.forEach(function (span) {
+      span.addEventListener('input', onEdit);
+      span.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') e.preventDefault();   // one run stays one run
+      });
+    });
+
+    // Intercept in-site links so the editor can browse like a visitor.
+    shadow.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a');
+      if (!a) return;
+      var href = a.getAttribute('href') || '';
+      if (/^#/.test(href)) return;
+      e.preventDefault();
+      var file = href.split('#')[0].split('?')[0].replace(/^\.?\//, '');
+      if (/\.html$/i.test(file) && pageNames.indexOf(file) !== -1) loadPage(file);
+    });
+
+    changes = {};
+    syncButtons();
+    setStatus('Editing ' + name, '');
+    elStage.scrollTop = 0;
+  }
+
+  function onEdit(e) {
+    var span = e.currentTarget;
+    var idx = Number(span.getAttribute('data-edit'));
+    var original = decodeEntities(runs[idx].text);
+    var now = span.textContent;
+    if (now.trim() === original.trim()) {
+      delete changes[idx];
+      span.classList.remove('changed');
+    } else {
+      changes[idx] = now;
+      span.classList.add('changed');
+    }
+    syncButtons();
+  }
+
+  // ---------------------------------------------------------------- save
+  // Splice new text into the original file string. Only the changed runs move;
+  // every other byte — indentation, comments, entities, line endings — survives.
+  async function save() {
+    if (!dirty()) return;
+    var idxs = Object.keys(changes).map(Number).sort(function (a, b) { return b - a; });
+    var out = srcText;
+    idxs.forEach(function (idx) {
+      var run = runs[idx];
+      var lead = run.text.match(/^\s*/)[0];
+      var tail = run.text.match(/\s*$/)[0];
+      var body = escapeText(changes[idx].trim());
+      out = out.slice(0, run.start) + lead + body + tail + out.slice(run.end);
+    });
+
+    try {
+      var fh = await dirHandle.getFileHandle(pageName, { create: false });
+      var w = await fh.createWritable();
+      await w.write(out);
+      await w.close();
+    } catch (err) {
+      setStatus('Save failed: ' + err.message, 'error');
+      return;
+    }
+
+    var n = idxs.length;
+    srcText = out;
+    runs = scanTextRuns(srcText);
+    changes = {};
+    spans.forEach(function (s) { s.classList.remove('changed'); });
+    syncButtons();
+    setStatus('Saved ' + n + ' edit' + (n === 1 ? '' : 's') + ' to ' + pageName, 'saved');
+  }
+
+  function revert() {
+    if (!dirty()) return;
+    if (!confirm('Discard ' + Object.keys(changes).length + ' unsaved edit(s)?')) return;
+    loadPage(pageName);
+  }
+
+  function teardown() {
+    assetURLs.forEach(function (u) { URL.revokeObjectURL(u); });
+    assetURLs = [];
+    shadow = null;
+    spans = [];
+  }
+
+  // ---------------------------------------------------------------- folder
+  var pageNames = [];
+
+  async function pickFolder() {
+    if (!window.showDirectoryPicker) {
+      showMessage('<strong>This browser can\'t edit local files.</strong> ' +
+        'The File System Access API is Chrome and Edge only. Open this page in one of those.');
+      return;
+    }
+    try {
+      dirHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
+    } catch (e) { return; }               // user cancelled
+
+    pageNames = [];
+    for await (var entry of dirHandle.values()) {
+      if (entry.kind === 'file' && /\.html$/i.test(entry.name) && entry.name !== 'editor.html') {
+        pageNames.push(entry.name);
+      }
+    }
+    pageNames.sort(function (a, b) {
+      if (a === 'index.html') return -1;
+      if (b === 'index.html') return 1;
+      return a.localeCompare(b);
+    });
+
+    if (!pageNames.length) {
+      showMessage('<strong>No pages found.</strong> That folder has no <code>.html</code> files in it. ' +
+        'Pick the folder that contains <code>index.html</code>.');
+      return;
+    }
+
+    elPages.innerHTML = '';
+    pageNames.forEach(function (n) {
+      var o = document.createElement('option');
+      o.value = n; o.textContent = n;
+      elPages.appendChild(o);
+    });
+    elPages.disabled = false;
+    elPick.textContent = 'Change folder…';
+    await loadPage(pageNames[0]);
+  }
+
+  // ---------------------------------------------------------------- wiring
+  elPick.addEventListener('click', pickFolder);
+  elPages.addEventListener('change', function () { loadPage(elPages.value); });
+  elSave.addEventListener('click', save);
+  elRevert.addEventListener('click', revert);
+
+  document.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+      e.preventDefault();
+      save();
+    }
+  });
+
+  window.addEventListener('beforeunload', function (e) {
+    if (dirty()) { e.preventDefault(); e.returnValue = ''; }
+  });
+})();
+</script>
+</body>
+</html>

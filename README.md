@@ -9,7 +9,7 @@ research-cassette.html  Imperial College London — passive diagnostic cassette
 research-ctc.html       UF IMG — lateral filter array microfluidics
 projects.html           Florida Rocket Lab + engineering work
 coursework.html         Major, courses, distinctions, involvement
-resume.html             CV download + featured sections
+resume.html             Resume download + featured sections
 assets/css/style.css    All styling (design tokens at the top)
 assets/js/main.js       Mobile nav + scroll reveal
 assets/img/             Project images, headshot, video posters
@@ -105,7 +105,7 @@ Then set the domain under Settings → Pages and tick **Enforce HTTPS**.
 | Clickable tab: About | `index.html` | Done |
 | Clickable tab: Research | `research.html` | Done |
 | Clickable tab: Coursework | `coursework.html` | Done |
-| Clickable tab: CV/Resume | `resume.html` | Done |
+| Clickable tab: Resume | `resume.html` | Done |
 | Headshot | `index.html` hero | Done |
 | Summary sentence/quote + longer blurb | `index.html` | Done |
 | Research interests | `index.html` | Done |
@@ -120,8 +120,8 @@ Then set the domain under Settings → Pages and tick **Enforce HTTPS**.
 | Major | `coursework.html` | Done |
 | Course list | `coursework.html`, from both transcripts | Done |
 | Distinctions / involvement | `coursework.html` | Done |
-| Resume/CV download button (PDF) | `resume.html`, hero, footer | Done |
-| Featured CV sections (2–3) | `resume.html` — experience, skills, leadership | Done |
+| Resume download button (PDF) | `resume.html`, hero, footer | Done |
+| Featured resume sections (2–3) | `resume.html` — experience, skills, leadership | Done |
 | Contact section with UFL email | Every page, plus footer | Done |
 | Publicly accessible | GitHub Pages | **After you deploy** |
 

@@ -58,7 +58,7 @@ Wait 1–2 minutes. GitHub shows a banner with your URL:
 without you being signed in, it is genuinely public. If it 404s, wait another minute —
 the first build is the slow one.
 
-Click through all five tabs, download the CV, and press play on both videos.
+Click through all five tabs, download the resume, and press play on both videos.
 
 ---
 
