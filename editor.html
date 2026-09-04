@@ -264,15 +264,57 @@
   }
 
   // Rewrite the site stylesheet so it still applies inside a shadow root.
+  // Selectors are found by scanning for the text preceding each "{" — matching
+  // on position rather than on what happens to sit before the rule, so a rule
+  // that follows a comment (like :root does) is rewritten the same as any other.
   function adaptCSS(css) {
-    return css
-      .replace(/(^|\})\s*:root\b/g, '$1 :host')
-      .replace(/(^|\})\s*html\s*\{/g, '$1 :host {')
-      .replace(/(^|\})\s*body\s*\{/g, '$1 .doc-body {')
-      // scroll-reveal starts hidden and is switched on by main.js, which we
-      // don't run here — show everything instead.
-      .replace(/\.reveal\s*\{[^}]*\}/g, '.reveal { opacity: 1; transform: none; }');
+    var out = '', buf = '', i = 0, n = css.length;
+
+    while (i < n) {
+      // Copy comments through untouched.
+      if (css.substr(i, 2) === '/*') {
+        var ce = css.indexOf('*/', i + 2);
+        ce = ce === -1 ? n : ce + 2;
+        buf += css.slice(i, ce);
+        i = ce;
+        continue;
+      }
+      var c = css.charAt(i);
+      if (c === '{') {
+        out += rewriteSelector(buf) + '{';
+        buf = '';
+        i++;
+        continue;
+      }
+      if (c === '}' || c === ';') {
+        out += buf + c;
+        buf = '';
+        i++;
+        continue;
+      }
+      buf += c;
+      i++;
+    }
+    out += buf;
+
+    // Scroll-reveal starts hidden and is switched on by main.js, which we don't
+    // run here — show everything instead.
+    return out.replace(/\.reveal\s*\{[^}]*\}/g, '.reveal { opacity: 1; transform: none; }');
   }
+
+  function rewriteSelector(sel) {
+    // At-rule preludes (@media, @supports, @font-face…) are not selectors.
+    if (/^\s*@/.test(sel)) return sel;
+    return sel
+      .replace(/:root\b/g, ':host')
+      .replace(/(^|[\s,>+~()])html\b/g, '$1:host')
+      .replace(/(^|[\s,>+~()])body\b/g, '$1.doc-body');
+  }
+
+  // Floor for readability: if the site's own tokens ever fail to resolve inside
+  // the shadow root, text must not fall back to inheriting the editor's palette.
+  // Declared before the site CSS so the real styles override it.
+  var BASE_CSS = ':host, .doc-body { color: #191317; background: #faf8f7; }';
 
   var EDIT_CSS = [
     '.doc-body { margin: 0; }',
@@ -367,7 +409,7 @@
     var host = document.getElementById('host');
     shadow = host.attachShadow({ mode: 'open' });
     var styleEl = document.createElement('style');
-    styleEl.textContent = css + '\n' + EDIT_CSS;
+    styleEl.textContent = BASE_CSS + '\n' + css + '\n' + EDIT_CSS;
     var wrap = document.createElement('div');
     wrap.className = 'doc-body';
     wrap.innerHTML = doc.body.innerHTML;
