@@ -251,6 +251,43 @@
     catch (e) { return null; }
   }
 
+  // style.css is a one-line theme switch that @imports the real stylesheet,
+  // so the preview has to follow local imports or it renders unstyled.
+  // Remote imports are left in place for the browser to fetch itself.
+  async function readStylesheet(path, depth) {
+    depth = depth || 0;
+    var css = await readTextAsset(path);
+    if (css === null || depth > 4) return css;
+
+    // Strip comments before looking for @import. The theme switch keeps the
+    // inactive themes commented out, and a browser ignores those — so must we,
+    // or the preview would load all three stylesheets on top of each other.
+    css = css.replace(/\/\*[\s\S]*?\*\//g, '');
+
+    var dir = path.replace(/[^/]*$/, '');            // "assets/css/style.css" -> "assets/css/"
+    var re = /@import\s+(?:url\(\s*)?['"]?([^'")\s]+)['"]?\s*\)?\s*;/g;
+    var jobs = [], m;
+    while ((m = re.exec(css))) jobs.push({ stmt: m[0], href: m[1] });
+
+    for (var i = 0; i < jobs.length; i++) {
+      var href = jobs[i].href;
+      if (/^(https?:)?\/\//.test(href)) continue;    // remote: leave for the browser
+      var nested = await readStylesheet(normalisePath(dir + href), depth + 1);
+      css = css.replace(jobs[i].stmt, nested === null ? '' : nested);
+    }
+    return css;
+  }
+
+  function normalisePath(p) {
+    var parts = p.split('/'), out = [];
+    for (var i = 0; i < parts.length; i++) {
+      if (parts[i] === '.' || parts[i] === '') continue;
+      if (parts[i] === '..') { out.pop(); continue; }
+      out.push(parts[i]);
+    }
+    return out.join('/');
+  }
+
   async function objectURLFor(path) {
     try {
       var url = URL.createObjectURL(await fileFromPath(path));
@@ -385,7 +422,7 @@
     for (var l = 0; l < links.length; l++) {
       var href = links[l].getAttribute('href');
       if (isLocal(href)) {
-        var text = await readTextAsset(href);
+        var text = await readStylesheet(href);
         if (text) css += adaptCSS(text) + '\n';
         links[l].remove();
       }
