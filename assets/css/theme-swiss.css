@@ -193,6 +193,7 @@ p:last-child { margin-bottom: 0; }
   border: 0; border-right: 1px solid var(--line); border-radius: 0;
   padding: .35rem .9rem; color: var(--ink-2); background: transparent;
 }
+.pill:last-child { border-right: 0; }
 .pill--accent { color: var(--paper); background: var(--accent); border-right-color: var(--accent); font-weight: 500; }
 
 /* ---------- buttons ---------- */
