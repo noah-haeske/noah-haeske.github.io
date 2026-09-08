@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Rotational Redesign of the VLEAD Sample Preparation Device &middot; Noah Haeske</title>
+<meta name="description" content="Rebuilding VLEAD, a paper-based lysis, RNA enrichment, and amplification device, so that it runs on a single twist instead of a hand-aligned slide. Interdisciplinary Microsystems Group, University of Florida.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="site-head__inner">
+    <a class="brand" href="index.html">Noah Haeske <span>Mechanical Engineering</span></a>
+    <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false">Menu</button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="index.html">About</a>
+      <a href="research.html" aria-current="page">Research</a>
+      <a href="projects.html">Projects</a>
+      <a href="coursework.html">Coursework</a>
+      <a href="resume.html">Resume</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="label"><a href="research.html" style="color:inherit;text-decoration:none;">&larr; Research</a> &nbsp;/&nbsp; Project 03</p>
+      <h1>A Rotational Redesign of the VLEAD Sample Preparation Device</h1>
+      <p class="lede">VLEAD runs lysis, paper-based RNA enrichment, and amplification inside one device. The published version works, but it works in a lab: milled polycarbonate, adhesive tape, and a slide that has to be lined up by a trained hand. This redesign turns the whole sequence into a twist.</p>
+    </div>
+  </section>
+
+  <!-- ============ LEAD MEDIA ============ -->
+  <div class="wrap">
+    <figure class="fig reveal" style="margin-top:0;">
+      <video controls muted loop playsinline preload="metadata" poster="assets/img/vlead_rotation_poster.jpg">
+        <source src="assets/video/vlead_rotation.mp4" type="video/mp4">
+        Your browser does not support embedded video. <a href="assets/video/vlead_rotation.mp4">Download the clip</a>.
+      </video>
+      <figcaption><b>Fig. 1</b> &nbsp;Bench test of the current build, dye standing in for reagent. Turning the top indexes the paper from one well to the next, so the operator advances the assay by rotating a single part rather than by aligning a sliding layer.</figcaption>
+    </figure>
+  </div>
+
+  <!-- ============ PROJECT SPEC SHEET ============ -->
+  <div class="wrap">
+    <div class="specsheet reveal">
+      <section class="specsheet__row">
+        <p class="specsheet__label">Affiliation</p>
+        <dl class="spec specsheet__items">
+          <div><dt>Principal Investigator</dt><dd>Prof. Z. Hugh Fan</dd></div>
+          <div><dt>Institution</dt><dd>University of Florida</dd></div>
+          <div><dt>Department</dt><dd>Mechanical &amp; Aerospace Engineering</dd></div>
+          <div><dt>Group</dt><dd>Interdisciplinary Microsystems Group</dd></div>
+          <div><dt>Status</dt><dd>Ongoing</dd></div>
+        </dl>
+      </section>
+      <section class="specsheet__row">
+        <p class="specsheet__label">Design goals</p>
+        <dl class="spec specsheet__items">
+          <div><dt>Operation</dt><dd>One rotation, no alignment</dd></div>
+          <div><dt>Assembly</dt><dd>No tape, no milled polycarbonate</dd></div>
+          <div><dt>Paper handling</dt><dd>Screw clamp</dd></div>
+          <div><dt>Intended user</dt><dd>Untrained operator</dd></div>
+        </dl>
+      </section>
+    </div>
+  </div>
+
+  <!-- ============ FOCUS ============ -->
+  <section class="section" style="margin-top: clamp(2.5rem, 5vw, 3.5rem);">
+    <div class="wrap">
+      <div class="split split--even reveal">
+        <div class="prose">
+          <h3>What VLEAD does</h3>
+          <p>VLEAD is a valve-enabled device that carries a sample through chemical lysis, paper-based RNA enrichment, and nucleic acid amplification without the operator pipetting between steps. The reagents are held in separate wells and the paper is moved between them, so the order of operations is built into the mechanism rather than into a protocol someone has to follow correctly.</p>
+          <p>The version published by the Fan lab establishes that the chemistry works in this format. What it does not do is survive contact with a non-specialist. It is assembled from milled polycarbonate and adhesive tape, and the paper is advanced by sliding one layer across another, which means the person running it has to both align the layers and judge when a step is complete.</p>
+          <p>Underneath the packaging it is a low-cost platform for sequential reagent release using microfluidic ball valves. The goal is to run chemical lysis, RNA enrichment, and nucleic acid amplification as an ordered sequence inside a single device, enabling multiplexed detection of HIV, dengue, and Zika without an operator pipetting between steps. It is the same instinct as my <a href="research-cassette.html">work in London</a>: replace a procedure that currently requires a trained hand with something the device does by itself.</p>
+        </div>
+        <div class="prose">
+          <h3>What I changed</h3>
+          <p>I rebuilt the device around rotation. The paper is clamped in a screw fitting and indexed between wells by turning a single part, which removes the alignment problem: a thread can only go one way, and the stops are geometric rather than judged by eye. The milled polycarbonate and the tape are both gone, replaced by printed parts that assemble without adhesive.</p>
+          <p>The point of the exercise is deployment. A device that needs a trained hand is a lab instrument no matter how good its chemistry is, so most of the design effort has gone into removing the places where an operator can get it wrong rather than into the assay itself.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BUILD ============ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>The parts that replaced the slide</h2>
+      </div>
+
+      <figure class="fig reveal">
+        <img src="assets/img/ctc_ballvalve.jpg" alt="Diagram of the sequential reagent release platform: buffer wells with ball valves above a mixing unit and paper detection unit, plus the portable heater and microscope stand">
+        <figcaption><b>Fig. 2</b> &nbsp;The sequential reagent release platform. <b>a</b> Four buffer wells, each sealed by a bearing ball, sit above a mixing unit and a layered paper detection unit. <b>b</b> A pin displaces the ball and opens a gap, releasing one reagent at a time in a fixed order. <b>c</b> The portable reader: heater, integrated circuit, batteries, and a microscope on a 3D-printed stand, sized to run the assay away from a lab bench.</figcaption>
+      </figure>
+
+      <div class="split reveal">
+        <div class="prose">
+          <p>The reagent wells sit in a single printed disc. Each well is a hemispherical pocket with a through-hole at its base, and an alignment pin sets the disc's orientation relative to the rest of the stack, so the sequence the paper visits is fixed at assembly rather than chosen during the run.</p>
+          <p>Above it, a threaded cap carries the paper. Tightening the cap clamps the paper against its seat, and turning the assembly is what carries the paper from one well to the next. Everything that used to be a tape joint or a hand-aligned sliding face is now either a thread or a printed feature.</p>
+        </div>
+
+        <figure class="fig">
+          <img src="assets/img/vlead_wells.png" alt="CAD render of the reagent disc, four hemispherical wells with through-holes and an alignment pin">
+          <figcaption><b>Fig. 3</b> &nbsp;Reagent disc. Four hemispherical wells, each with a through-hole at the base, and an alignment pin at the rim.</figcaption>
+        </figure>
+      </div>
+
+      <div class="fig-pair reveal">
+        <figure class="fig">
+          <img src="assets/img/vlead_section.png" alt="Sectioned CAD view of the paper holder showing the internal slot above the threaded stem">
+          <figcaption><b>Fig. 4</b> &nbsp;Section through the paper holder. The cut shows the internal slot the paper seats into and the port through the threaded stem beneath it.</figcaption>
+        </figure>
+        <figure class="fig">
+          <img src="assets/img/vlead_cap.png" alt="CAD render of the rotating cap with its threaded boss and alignment pin">
+          <figcaption><b>Fig. 5</b> &nbsp;Rotating cap. The threaded boss engages the body below, and the pin registers against the disc so rotation indexes rather than free-spins.</figcaption>
+        </figure>
+      </div>
+
+      <figure class="fig reveal">
+        <img src="assets/img/vlead_body.png" alt="CAD render of the threaded housing with an outlet port at the base">
+        <figcaption><b>Fig. 6</b> &nbsp;Housing. Internal threads take the cap, and the port at the base is the outlet the sample passes through.</figcaption>
+      </figure>
+
+      <dl class="spec reveal">
+        <div><dt>Design</dt><dd>SolidWorks</dd></div>
+        <div><dt>Fabrication</dt><dd>3D printing</dd></div>
+        <div><dt>Testing</dt><dd>Dye-based bench trials</dd></div>
+        <div><dt>Reporting</dt><dd>Monthly written reports</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ STATUS ============ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>Where it stands</h2>
+      </div>
+      <div class="prose narrow reveal">
+        <p>The current build has been run on the bench with dye standing in for reagent, which is enough to show that the rotation indexes cleanly, that the clamp holds the paper, and that liquid goes where the geometry says it should. It is not yet enough to say anything about the assay. Running the real chemistry through the redesigned device, and doing it enough times to speak about repeatability, is the next step.</p>
+        <p>The open questions are the ordinary ones for a printed device that has to seal. Print tolerance sets how well the clamp seats, the wells have to empty without leaving volume behind, and a mechanism that is easy to turn is also easy to over-turn, so the stops need to be firm enough that an operator feels them. None of these is a reason the approach will not work, but each one is a reason the first build is not the last.</p>
+      </div>
+
+      <div class="btn-row reveal" style="margin-top:2.4rem;">
+        <a class="btn btn--ghost" href="research-ctc.html">&larr; Previous project</a>
+        <a class="btn btn--ghost" href="projects.html">Engineering projects &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>Contact</h2>
+      </div>
+      <dl class="contact-grid reveal">
+        <div><dt>Email</dt><dd><a href="mailto:noah.haeske@ufl.edu">noah.haeske@ufl.edu</a></dd></div>
+        <div><dt>Phone</dt><dd><a href="tel:+14077059895">407-705-9895</a></dd></div>
+        <div><dt>Resume</dt><dd><a href="assets/docs/Noah_Haeske_Resume.pdf" download>Download PDF</a></dd></div>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap site-foot__inner">
+    <p class="fine">&copy; 2026 Noah Haeske &middot; University Scholars Program, University of Florida</p>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="mailto:noah.haeske@ufl.edu">noah.haeske@ufl.edu</a>
+      <a href="assets/docs/Noah_Haeske_Resume.pdf" download>Resume</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

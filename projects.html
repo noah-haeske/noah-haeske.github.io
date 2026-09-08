@@ -38,68 +38,34 @@
 
   <div class="wrap"><hr class="rule"></div>
 
-  <!-- ============ FRL ============ -->
+  <!-- ============ ROCKET LAB ============ -->
   <section class="section section--flush" style="padding-top: clamp(2.5rem, 5vw, 3.5rem);">
     <div class="wrap">
-      <p class="label">Project 01 &middot; Florida Rocket Lab</p>
-      <h2 style="max-width:22ch;">Cold Flow Test Platform &amp; Payload Systems</h2>
+      <p class="label">Florida Rocket Lab &middot; University of Florida</p>
 
-      <dl class="spec reveal" style="margin-top:1.8rem;">
-        <div><dt>Organization</dt><dd>Florida Rocket Lab, University of Florida</dd></div>
-        <div><dt>Role</dt><dd>Flight Vehicles Engineer</dd></div>
-        <div><dt>Duration</dt><dd>August 2025 &ndash; present</dd></div>
-        <div><dt>Tools</dt><dd>Ansys Mechanical, Python, DAQ instrumentation</dd></div>
-      </dl>
+      <div class="cards reveal" style="margin-top:1.4rem;">
 
-      <div class="prose narrow reveal" style="margin-top:2.6rem;">
-        <p>Cold flow testing is how you find out whether a propulsion system's plumbing behaves before there is anything combustible in it. That only works if you can see what happened, which makes the instrumentation as much of a design problem as the structure holding it.</p>
-        <p>I designed a vertical integration and cold flow test platform that captures pressure, thermal, and vibration data from twelve individual sensors, and wrote the Python pipeline that synchronizes and processes those multi-channel streams into dashboards the team can actually read. Raw multi-channel DAQ output is close to useless in a debrief; the value is in getting every channel onto a common clock and putting the anomaly in front of the person who needs to see it.</p>
-        <p>On the structural side, I used Ansys Mechanical to reduce bracket mass by 40% while keeping a factor of safety above 1.5.</p>
-        <p>I also designed a subscale solid-motor test vehicle that reaches Mach&nbsp;1.5, built to validate active canard control across both subsonic and supersonic flight regimes. Canard authority changes character as the vehicle goes transonic, so a control scheme that behaves on paper still has to be flown; the subscale vehicle is the cheapest way to put the controller in front of that transition before it flies on the full-scale airframe. The vehicle is currently under preliminary design review, so the airframe, mass properties, and stability margin below are the PDR baseline rather than a frozen design.</p>
-        <p>I am continuing as responsible engineer for payload systems on the 2026&ndash;27 vehicle, leading a team of four engineers.</p>
+        <a class="card" href="projects-subscale.html">
+          <div class="card__media"><img src="assets/img/frl_subscale_ork.png" alt="OpenRocket side view of the subscale canard test vehicle"></div>
+          <div class="card__body">
+            <p class="card__meta">Current project &middot; under preliminary design review</p>
+            <h3>Subscale Canard Test Vehicle</h3>
+            <p>A Mach 1.5 subscale vehicle built to fly active canard control through the transonic transition before it flies on the full-scale airframe. Designed now, built next.</p>
+            <span class="card__more">Read the project &rarr;</span>
+          </div>
+        </a>
+
+        <a class="card" href="projects-coldflow.html">
+          <div class="card__media"><img src="assets/img/frl_teststand.jpg" alt="The vertical integration and cold flow test platform set up outdoors at night"></div>
+          <div class="card__body">
+            <p class="card__meta">Florida Rocket Lab &middot; Aug 2025&ndash;present</p>
+            <h3>Cold Flow Test Platform &amp; Payload Systems</h3>
+            <p>A vertical integration and cold flow test platform on twelve instrumented channels, the Python pipeline that makes the data readable, and an Ansys bracket study that cut 40% of the mass.</p>
+            <span class="card__more">Read the project &rarr;</span>
+          </div>
+        </a>
+
       </div>
-
-      <div class="fig-pair reveal">
-        <figure class="fig">
-          <img src="assets/img/frl_teststand.jpg" alt="The vertical integration and cold flow test platform set up outdoors at night: vehicle stage on a rail, instrumented control panel with pressure gauges, compressor, and control cabinet">
-          <figcaption><b>Fig. 1</b> &nbsp;The cold flow setup for a night test. The vehicle stands vertically on the rail at the left, propellant loading infrastructure next to it, and the data acquisition cabinet on the far right.</figcaption>
-        </figure>
-        <figure class="fig">
-          <video controls preload="none" playsinline poster="assets/img/frl_coldflow_poster.jpg">
-            <source src="assets/video/frl_coldflow.mp4" type="video/mp4">
-            Your browser does not support embedded video. <a href="assets/video/frl_coldflow.mp4">Download the clip</a>.
-          </video>
-          <figcaption><b>Fig. 2</b> &nbsp;Cold flow, filmed at the base of the stage. The vapor cloud is the working fluid venting through the feed system.</figcaption>
-        </figure>
-      </div>
-
-      <figure class="fig reveal">
-        <video controls preload="none" playsinline poster="assets/img/frl_launch_poster.jpg">
-          <source src="assets/video/frl_launch.mp4" type="video/mp4">
-          Your browser does not support embedded video. <a href="assets/video/frl_launch.mp4">Download the clip</a>.
-        </video>
-        <figcaption><b>Fig. 3</b> &nbsp;Launch.</figcaption>
-      </figure>
-
-      <figure class="fig reveal">
-        <img src="assets/img/frl_subscale_ork.png" alt="OpenRocket side view of the Vertigo Subscale vehicle: 82 in long, 6 in maximum diameter, with a conical nose cone, recovery bay, canards forward of the aft fin can, and four aft fins. CG marked at 49.1 in and CP at 55.3 in.">
-        <figcaption><b>Fig. 4</b> &nbsp;PDR baseline layout for the subscale canard test vehicle. 82&nbsp;in long, 6&nbsp;in maximum diameter, 53.9&nbsp;lb wet. The forward set of fins is the canard control surface; CG at 49.1&nbsp;in and CP at 55.3&nbsp;in give 1.04&nbsp;cal of static margin at M&nbsp;=&nbsp;0.3.</figcaption>
-      </figure>
-
-      <!--
-        Still worth adding when you have them:
-          assets/img/frl_fea.png        : an Ansys stress plot from the bracket optimization
-          assets/img/frl_dashboard.png  : a screenshot of the Python data dashboard
-        Both would show the analysis side, which the photos and video do not.
-      -->
-
-      <dl class="spec reveal">
-        <div><dt>Sensor channels</dt><dd>12 (pressure, thermal, vibration)</dd></div>
-        <div><dt>Bracket mass</dt><dd>&minus;40%</dd></div>
-        <div><dt>Factor of safety</dt><dd>&gt; 1.5 maintained</dd></div>
-        <div><dt>Subscale test vehicle</dt><dd>Mach 1.5, active canard control &middot; under PDR</dd></div>
-        <div><dt>Team led</dt><dd>4 engineers, payload systems</dd></div>
-      </dl>
     </div>
   </section>
 
@@ -128,12 +94,21 @@
             <span class="card__more">Read the project &rarr;</span>
           </div>
         </a>
+        <a class="card" href="research-vlead.html">
+          <div class="card__media"><img src="assets/img/vlead_wells.png" alt="CAD render of the VLEAD reagent disc with four hemispherical wells"></div>
+          <div class="card__body">
+            <p class="card__meta">Research &middot; University of Florida</p>
+            <h3>A Rotational Redesign of VLEAD</h3>
+            <p>Rebuilding a paper-based sample preparation device so the operator advances it by turning one part.</p>
+            <span class="card__more">Read the project &rarr;</span>
+          </div>
+        </a>
       </div>
 
       <!--
         Room to grow: as you add projects (senior design, personal builds, coursework projects),
-        copy the "Project 01" block above and give each one its own section, or split them into
-        dedicated pages following the pattern of research-cassette.html.
+        add another card to the section above and give each one its own page, following the
+        pattern of projects-coldflow.html.
       -->
     </div>
   </section>

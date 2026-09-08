@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cold Flow Test Platform &amp; Payload Systems &middot; Noah Haeske</title>
+<meta name="description" content="A vertical integration and cold flow test platform for Florida Rocket Lab: twelve instrumented channels, a Python pipeline that turns raw DAQ output into readable dashboards, and an Ansys bracket study that cut mass by 40 percent.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="site-head__inner">
+    <a class="brand" href="index.html">Noah Haeske <span>Mechanical Engineering</span></a>
+    <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false">Menu</button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="index.html">About</a>
+      <a href="research.html">Research</a>
+      <a href="projects.html" aria-current="page">Projects</a>
+      <a href="coursework.html">Coursework</a>
+      <a href="resume.html">Resume</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="label"><a href="projects.html" style="color:inherit;text-decoration:none;">&larr; Projects</a> &nbsp;/&nbsp; Florida Rocket Lab</p>
+      <h1>Cold Flow Test Platform &amp; Payload Systems</h1>
+      <p class="lede">Cold flow testing is how you find out whether a propulsion system's plumbing behaves before there is anything combustible in it. That only works if you can see what happened, which makes the instrumentation as much of a design problem as the structure holding it.</p>
+    </div>
+  </section>
+
+  <!-- ============ LEAD IMAGE ============ -->
+  <div class="wrap">
+    <figure class="fig reveal" style="margin-top:0;">
+      <img src="assets/img/frl_teststand.jpg" alt="The vertical integration and cold flow test platform set up outdoors at night: vehicle stage on a rail, instrumented control panel with pressure gauges, compressor, and control cabinet">
+      <figcaption><b>Fig. 1</b> &nbsp;The cold flow setup for a night test. The vehicle stands vertically on the rail at the left, propellant loading infrastructure next to it, and the data acquisition cabinet on the far right.</figcaption>
+    </figure>
+  </div>
+
+  <!-- ============ PROJECT SPEC SHEET ============ -->
+  <div class="wrap">
+    <div class="specsheet reveal">
+      <section class="specsheet__row">
+        <p class="specsheet__label">Role</p>
+        <dl class="spec specsheet__items">
+          <div><dt>Organization</dt><dd>Florida Rocket Lab, University of Florida</dd></div>
+          <div><dt>Role</dt><dd>Flight Vehicles Engineer</dd></div>
+          <div><dt>Duration</dt><dd>August 2025 &ndash; present</dd></div>
+          <div><dt>Tools</dt><dd>Ansys Mechanical, Python, DAQ instrumentation</dd></div>
+        </dl>
+      </section>
+      <section class="specsheet__row">
+        <p class="specsheet__label">Outcomes</p>
+        <dl class="spec specsheet__items">
+          <div><dt>Sensor channels</dt><dd>12 (pressure, thermal, vibration)</dd></div>
+          <div><dt>Bracket mass</dt><dd>&minus;40%</dd></div>
+          <div><dt>Factor of safety</dt><dd>&gt; 1.5 maintained</dd></div>
+          <div><dt>Team led</dt><dd>4 engineers, payload systems</dd></div>
+        </dl>
+      </section>
+    </div>
+  </div>
+
+  <!-- ============ WORK ============ -->
+  <section class="section" style="margin-top: clamp(2.5rem, 5vw, 3.5rem);">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>Instrumentation as the design problem</h2>
+      </div>
+
+      <div class="split reveal">
+        <div class="prose">
+          <p>I designed a vertical integration and cold flow test platform that captures pressure, thermal, and vibration data from twelve individual sensors, and wrote the Python pipeline that synchronizes and processes those multi-channel streams into dashboards the team can actually read. Raw multi-channel DAQ output is close to useless in a debrief; the value is in getting every channel onto a common clock and putting the anomaly in front of the person who needs to see it.</p>
+          <p>On the structural side, I used Ansys Mechanical to reduce bracket mass by 40% while keeping a factor of safety above 1.5.</p>
+          <p>I am continuing as responsible engineer for payload systems on the 2026&ndash;27 vehicle, leading a team of four engineers.</p>
+        </div>
+
+        <figure class="fig">
+          <video controls preload="none" playsinline poster="assets/img/frl_coldflow_poster.jpg">
+            <source src="assets/video/frl_coldflow.mp4" type="video/mp4">
+            Your browser does not support embedded video. <a href="assets/video/frl_coldflow.mp4">Download the clip</a>.
+          </video>
+          <figcaption><b>Fig. 2</b> &nbsp;Cold flow, filmed at the base of the stage. The vapor cloud is the working fluid venting through the feed system.</figcaption>
+        </figure>
+      </div>
+
+      <figure class="fig reveal">
+        <video controls preload="none" playsinline poster="assets/img/frl_launch_poster.jpg">
+          <source src="assets/video/frl_launch.mp4" type="video/mp4">
+          Your browser does not support embedded video. <a href="assets/video/frl_launch.mp4">Download the clip</a>.
+        </video>
+        <figcaption><b>Fig. 3</b> &nbsp;Launch.</figcaption>
+      </figure>
+
+      <!--
+        Still worth adding when you have them:
+          assets/img/frl_fea.png        : an Ansys stress plot from the bracket optimization
+          assets/img/frl_dashboard.png  : a screenshot of the Python data dashboard
+        Both would show the analysis side, which the photos and video do not.
+      -->
+
+      <div class="btn-row reveal" style="margin-top:2.4rem;">
+        <a class="btn btn--ghost" href="projects.html">&larr; All projects</a>
+        <a class="btn btn--ghost" href="projects-subscale.html">Current project: subscale canard vehicle &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>Contact</h2>
+      </div>
+      <dl class="contact-grid reveal">
+        <div><dt>Email</dt><dd><a href="mailto:noah.haeske@ufl.edu">noah.haeske@ufl.edu</a></dd></div>
+        <div><dt>Phone</dt><dd><a href="tel:+14077059895">407-705-9895</a></dd></div>
+        <div><dt>Resume</dt><dd><a href="assets/docs/Noah_Haeske_Resume.pdf" download>Download PDF</a></dd></div>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap site-foot__inner">
+    <p class="fine">&copy; 2026 Noah Haeske &middot; University Scholars Program, University of Florida</p>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="mailto:noah.haeske@ufl.edu">noah.haeske@ufl.edu</a>
+      <a href="assets/docs/Noah_Haeske_Resume.pdf" download>Resume</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
