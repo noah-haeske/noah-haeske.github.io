@@ -37,6 +37,14 @@
     </div>
   </section>
 
+  <!-- ============ LEAD IMAGE ============ -->
+  <div class="wrap">
+    <figure class="fig reveal" style="margin-top:0;">
+      <img src="assets/img/photo_cassette.jpg" alt="3D-printed cassette body showing the annular heating chamber around the central sample well">
+      <figcaption><b>Fig. 1</b> &nbsp;Printed cassette body. The annular heating chamber, loaded with salt and phase-change material, surrounds the central sample well. The lateral flow assay sits below the heating chamber so that gravity pulls sample onto the pad once the membrane ruptures.</figcaption>
+    </figure>
+  </div>
+
   <!-- ============ PROJECT SPEC SHEET ============ -->
   <div class="wrap">
     <div class="specsheet reveal">
@@ -62,53 +70,36 @@
     </div>
   </div>
 
-  <!-- ============ FOCUS ============ -->
-  <section class="section" style="margin-top: clamp(2.5rem, 5vw, 3.5rem);">
-    <div class="wrap">
-      <div class="prose narrow reveal">
-        <h3>Research focus</h3>
-        <p>Isothermal DNA amplification is far more sensitive than a lateral flow assay on its own, but it requires holding a reaction at elevated temperature for roughly twenty minutes. In practice that means a heater, a controller, and a power source: the same laboratory infrastructure that a point-of-care test is meant to remove. The research question was whether a controlled thermal profile and a timed fluid transfer could both be produced from stored chemical energy and material properties alone, inside a disposable cassette that a non-technical user activates with water.</p>
-        <p>The group's wider program builds intelligent interfaces between chemical and biological systems and low-cost electronics, with a strong emphasis on manufacturable diagnostics for settings without reliable laboratory access. This project sat on the fully passive end of that spectrum: no electronics at all, with every function that would normally be handled by a circuit reassigned to a material.</p>
-
-        <h3>My responsibilities</h3>
-        <p>I owned the project end to end. I designed the cassette geometry in Fusion 360 and iterated the printed body through several revisions of the annular heating chamber, sizing the wall thickness and chamber volume against the reaction volume it had to heat. I built the characterization rig, sealing a thermocouple into the sample well so that runs reported reaction-volume temperature rather than the much friendlier chamber-wall temperature. I then designed and executed the parameter sweep across 49 combinations of phase-change material and magnesium chloride mass, logging every run and writing the Python and Matplotlib pipeline that reduced the raw traces to minutes-in-window.</p>
-        <p>Separately I developed the passive timing valve: casting PVA membranes across a range of concentrations, cast volumes, and plasticizer additions, then screening them with a tracer dye on real lateral flow sample pads so that each run reported both when the membrane opened and how cleanly it failed. At the end of the placement I ran a limited end-to-end trial through the assembled cassette and confirmed product by gel electrophoresis.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ ARCHITECTURE ============ -->
-  <section class="section">
+  <section class="section" style="margin-top: clamp(2.5rem, 5vw, 3.5rem);">
     <div class="wrap">
       <div class="section__head">
         <h2>A two-stage passive system</h2>
       </div>
 
-      <div class="prose narrow reveal">
-        <p>An annular heating chamber wraps concentrically around the central sample chamber, maximizing heated wall area in contact with the reaction volume and keeping the thermal path short and radially symmetric. The sample chamber sits directly upstream of the lateral flow strip, separated from it by a sacrificial membrane that governs when amplified product is released.</p>
-      </div>
+      <div class="split reveal">
+        <div>
+          <div class="prose">
+            <p>An annular heating chamber wraps concentrically around the central sample chamber, maximizing heated wall area in contact with the reaction volume and keeping the thermal path short and radially symmetric. The sample chamber sits directly upstream of the lateral flow strip, separated from it by a sacrificial membrane that governs when amplified product is released.</p>
+          </div>
 
-      <ol class="steps reveal">
-        <li><b>Exothermic charge.</b> Water activation triggers an MgCl<sub>2</sub> hydration exotherm: high energy density and fast release, but an uncontrolled spike on its own.</li>
-        <li><b>PCM buffer.</b> A phase-change ring absorbs the exotherm peak as latent heat, then returns it slowly on crystallization, converting a spike into a usable plateau.</li>
-        <li><b>Sacrificial valve.</b> A PVA membrane swells and ruptures on a fixed timescale, releasing product to the strip only after amplification completes.</li>
-      </ol>
+          <ol class="steps">
+            <li><b>Exothermic charge.</b> Water activation triggers an MgCl<sub>2</sub> hydration exotherm: high energy density and fast release, but an uncontrolled spike on its own.</li>
+            <li><b>PCM buffer.</b> A phase-change ring absorbs the exotherm peak as latent heat, then returns it slowly on crystallization, converting a spike into a usable plateau.</li>
+            <li><b>Sacrificial valve.</b> A PVA membrane swells and ruptures on a fixed timescale, releasing product to the strip only after amplification completes.</li>
+          </ol>
+        </div>
+
+        <figure class="fig">
+          <img src="assets/img/cad_exploded.png" alt="Exploded CAD assembly showing the heating chamber, phase-change ring, and sample well stacked above the lateral flow housing">
+          <figcaption><b>Fig. 2</b> &nbsp;Exploded assembly. Heating chamber, PCM ring, and sample well stack concentrically above the lateral flow housing.</figcaption>
+        </figure>
+      </div>
 
       <figure class="fig reveal">
-        <img src="assets/img/cad_exploded.png" alt="Exploded CAD assembly showing the heating chamber, phase-change ring, and sample well stacked above the lateral flow housing">
-        <figcaption><b>Fig. 1</b> &nbsp;Exploded assembly. Heating chamber, PCM ring, and sample well stack concentrically above the lateral flow housing.</figcaption>
+        <img src="assets/img/photo_thermal_rig.jpg" alt="Characterization build with a thermocouple sealed into the sample well">
+        <figcaption><b>Fig. 3</b> &nbsp;Characterization build. A thermocouple sealed into the sample well logs reaction-volume temperature rather than chamber-wall temperature.</figcaption>
       </figure>
-
-      <div class="fig-pair reveal">
-        <figure class="fig">
-          <img src="assets/img/photo_cassette.jpg" alt="3D-printed cassette body showing the annular heating chamber around the central sample well">
-          <figcaption><b>Fig. 2</b> &nbsp;Printed cassette body. The annular heating chamber, loaded with salt and phase-change material, surrounds the central sample well. The lateral flow assay sits below the heating chamber so that gravity pulls sample onto the pad once the membrane ruptures.</figcaption>
-        </figure>
-        <figure class="fig">
-          <img src="assets/img/photo_thermal_rig.jpg" alt="Characterization build with a thermocouple sealed into the sample well">
-          <figcaption><b>Fig. 3</b> &nbsp;Characterization build. A thermocouple sealed into the sample well logs reaction-volume temperature rather than chamber-wall temperature.</figcaption>
-        </figure>
-      </div>
 
       <dl class="spec reveal">
         <div><dt>Design</dt><dd>Fusion 360</dd></div>
@@ -116,6 +107,24 @@
         <div><dt>Instrumentation</dt><dd>Thermocouple logging</dd></div>
         <div><dt>Analysis</dt><dd>Python, Matplotlib</dd></div>
       </dl>
+    </div>
+  </section>
+
+  <!-- ============ FOCUS ============ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="split split--even reveal">
+        <div class="prose">
+          <h3>Research focus</h3>
+          <p>Isothermal DNA amplification is far more sensitive than a lateral flow assay on its own, but it requires holding a reaction at elevated temperature for roughly twenty minutes. In practice that means a heater, a controller, and a power source: the same laboratory infrastructure that a point-of-care test is meant to remove. The research question was whether a controlled thermal profile and a timed fluid transfer could both be produced from stored chemical energy and material properties alone, inside a disposable cassette that a non-technical user activates with water.</p>
+          <p>The group's wider program builds intelligent interfaces between chemical and biological systems and low-cost electronics, with a strong emphasis on manufacturable diagnostics for settings without reliable laboratory access. This project sat on the fully passive end of that spectrum: no electronics at all, with every function that would normally be handled by a circuit reassigned to a material.</p>
+        </div>
+        <div class="prose">
+          <h3>My responsibilities</h3>
+          <p>I owned the project end to end. I designed the cassette geometry in Fusion 360 and iterated the printed body through several revisions of the annular heating chamber, sizing the wall thickness and chamber volume against the reaction volume it had to heat. I built the characterization rig, sealing a thermocouple into the sample well so that runs reported reaction-volume temperature rather than the much friendlier chamber-wall temperature. I then designed and executed the parameter sweep across 49 combinations of phase-change material and magnesium chloride mass, logging every run and writing the Python and Matplotlib pipeline that reduced the raw traces to minutes-in-window.</p>
+          <p>Separately I developed the passive timing valve: casting PVA membranes across a range of concentrations, cast volumes, and plasticizer additions, then screening them with a tracer dye on real lateral flow sample pads so that each run reported both when the membrane opened and how cleanly it failed. At the end of the placement I ran a limited end-to-end trial through the assembled cassette and confirmed product by gel electrophoresis.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -155,15 +164,17 @@
         <h2>Timing as a material property</h2>
       </div>
 
-      <div class="prose narrow reveal">
-        <p>Product must not reach the strip early, because flow before amplification completes destroys the sensitivity gain the heater exists to produce. With no power available, timing had to become a material property, so I used a PVA membrane sized to swell and rupture at the end of the window.</p>
-        <p>Casting condition sets both the rupture time and how cleanly the membrane fails, so I screened PVA concentration (w/v), cast volume, and plasticizer additions by running a tracer dye on real lateral flow sample pads. Each run therefore reported two things: when the membrane opened, and how.</p>
-      </div>
+      <div class="split reveal">
+        <div class="prose">
+          <p>Product must not reach the strip early, because flow before amplification completes destroys the sensitivity gain the heater exists to produce. With no power available, timing had to become a material property, so I used a PVA membrane sized to swell and rupture at the end of the window.</p>
+          <p>Casting condition sets both the rupture time and how cleanly the membrane fails, so I screened PVA concentration (w/v), cast volume, and plasticizer additions by running a tracer dye on real lateral flow sample pads. Each run therefore reported two things: when the membrane opened, and how.</p>
+        </div>
 
-      <figure class="fig reveal" style="max-width:340px;">
-        <img src="assets/img/pva_stock.png" alt="Bottle of poly(vinyl alcohol), Mw 85,000-124,000, 99+% hydrolyzed" width="360" height="360">
-        <figcaption><b>Fig. 7</b> &nbsp;The valve stock. Poly(vinyl alcohol), Mw 85,000&ndash;124,000, 99+% hydrolyzed. Membranes were cast from this grade across a range of concentrations, cast volumes, and plasticizer additions.</figcaption>
-      </figure>
+        <figure class="fig">
+          <img src="assets/img/pva_stock.png" alt="Bottle of poly(vinyl alcohol), Mw 85,000-124,000, 99+% hydrolyzed" width="360" height="360">
+          <figcaption><b>Fig. 7</b> &nbsp;The valve stock. Poly(vinyl alcohol), Mw 85,000&ndash;124,000, 99+% hydrolyzed. Membranes were cast from this grade across a range of concentrations, cast volumes, and plasticizer additions.</figcaption>
+        </figure>
+      </div>
 
       <div class="fig-pair reveal">
         <figure class="fig">
@@ -184,13 +195,19 @@
       <div class="section__head">
         <h2>Proof of function, not a performance number</h2>
       </div>
-      <div class="prose narrow reveal">
-        <p>With both subsystems characterized, I ran a limited end-to-end trial amplifying the <i>mecA</i> resistance gene from MRSA inside the cassette, confirming product by gel electrophoresis. The summer ended before I could repeat it at the replicate count a sensitivity claim would need, so it stands as proof of function rather than a performance number.</p>
-        <p>The honest limitations are the ones worth naming. The thermal optimum sits on a narrow ridge, which means manufacturing tolerance on charge mass matters more than it should; the valve shows build-to-build timing scatter that a tighter casting process would need to close; and 11 minutes in window is short of the 20 the protocol nominally wants. Each of those is a next experiment rather than a dead end.</p>
+      <div class="split reveal">
+        <div class="prose">
+          <p>With both subsystems characterized, I ran a limited end-to-end trial amplifying the <i>mecA</i> resistance gene from MRSA inside the cassette, confirming product by gel electrophoresis. The summer ended before I could repeat it at the replicate count a sensitivity claim would need, so it stands as proof of function rather than a performance number.</p>
+          <p>The honest limitations are the ones worth naming. The thermal optimum sits on a narrow ridge, which means manufacturing tolerance on charge mass matters more than it should; the valve shows build-to-build timing scatter that a tighter casting process would need to close; and 11 minutes in window is short of the 20 the protocol nominally wants. Each of those is a next experiment rather than a dead end.</p>
+        </div>
+
+        <figure class="fig">
+          <img src="assets/img/dna_meca.png" alt="Illustration of a DNA double helix" width="578" height="502">
+          <figcaption><b>Fig. 10</b> &nbsp;The target. <i>mecA</i> is the methicillin-resistance gene carried by MRSA; amplifying it inside the cassette is what the thermal and valve subsystems exist to make possible. Illustration, not experimental data.</figcaption>
+        </figure>
       </div>
 
       <div class="btn-row reveal" style="margin-top:2.4rem;">
-        <a class="btn btn--ghost" href="assets/docs/Noah_Haeske_Portfolio.pdf" download>Download the print version (PDF)</a>
         <a class="btn btn--ghost" href="research-ctc.html">Next project &rarr;</a>
       </div>
     </div>
