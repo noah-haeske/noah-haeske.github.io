@@ -32,7 +32,7 @@
   <section class="page-head">
     <div class="wrap">
       <p class="label"><a href="research.html" style="color:inherit;text-decoration:none;">&larr; Research</a> &nbsp;/&nbsp; Project 01</p>
-      <h1>Passive Thermal Control for an Infrastructure-Free Diagnostic Cassette</h1>
+      <h1>Passive Thermal and Fluid control for an Infrastructure-Free Diagnostic Cassette</h1>
       <p class="lede">Holding a DNA amplification reaction at temperature for twenty minutes normally takes a heater, a controller, and a power source, which is exactly the equipment a point-of-care test exists to eliminate. This one runs on a salt.</p>
     </div>
   </section>
@@ -42,7 +42,7 @@
     <div class="specsheet reveal">
       <section class="specsheet__row">
         <p class="specsheet__label">Affiliation</p>
-        <dl class="specsheet__items">
+        <dl class="spec specsheet__items">
           <div><dt>Principal Investigator</dt><dd>Prof. Firat G&uuml;der</dd></div>
           <div><dt>Institution</dt><dd>Imperial College London</dd></div>
           <div><dt>Department</dt><dd>Bioengineering</dd></div>
@@ -52,8 +52,8 @@
       </section>
       <section class="specsheet__row">
         <p class="specsheet__label">Design targets</p>
-        <dl class="specsheet__items">
-          <div><dt>Requirement</dt><dd>37&ndash;42&nbsp;&deg;C held for 20&nbsp;min</dd></div>
+        <dl class="spec specsheet__items">
+          <div><dt>Requirement</dt><dd>37–42 °C held for 10 min</dd></div>
           <div><dt>Power budget</dt><dd>Zero external power</dd></div>
           <div><dt>Operator input</dt><dd>One water activation step</dd></div>
           <div><dt>Cost target</dt><dd>Single-use disposable</dd></div>
@@ -67,11 +67,11 @@
     <div class="wrap">
       <div class="prose narrow reveal">
         <h3>Research focus</h3>
-        <p>Isothermal DNA amplification is far more sensitive than a lateral flow assay on its own, but it requires holding a reaction at elevated temperature for roughly twenty minutes. In practice that means a heater, a controller, and a power source: the same laboratory infrastructure that a point-of-care test is meant to remove. The research question was whether a controlled thermal profile and a timed fluid transfer could both be produced from stored chemical energy and material properties alone, inside a disposable that a non-technical user activates with water.</p>
-        <p>The group's wider programme builds intelligent interfaces between chemical and biological systems and low-cost electronics, with a strong emphasis on manufacturable diagnostics for settings without reliable laboratory access. This project sat on the fully passive end of that spectrum: no electronics at all, with every function that would normally be handled by a circuit reassigned to a material.</p>
+        <p>Isothermal DNA amplification is far more sensitive than a lateral flow assay on its own, but it requires holding a reaction at elevated temperature for roughly twenty minutes. In practice that means a heater, a controller, and a power source: the same laboratory infrastructure that a point-of-care test is meant to remove. The research question was whether a controlled thermal profile and a timed fluid transfer could both be produced from stored chemical energy and material properties alone, inside a disposable cassette that a non-technical user activates with water.</p>
+        <p>The group's wider program builds intelligent interfaces between chemical and biological systems and low-cost electronics, with a strong emphasis on manufacturable diagnostics for settings without reliable laboratory access. This project sat on the fully passive end of that spectrum: no electronics at all, with every function that would normally be handled by a circuit reassigned to a material.</p>
 
         <h3>My responsibilities</h3>
-        <p>I owned the thermal and timing subsystems end to end. I designed the cassette geometry in Fusion 360 and iterated the printed body through several revisions of the annular heating chamber, sizing the wall thickness and chamber volume against the reaction volume it had to heat. I built the characterization rig, sealing a thermocouple into the sample well so that runs reported reaction-volume temperature rather than the much friendlier chamber-wall temperature. I then designed and executed the parameter sweep across 49 combinations of phase-change material and magnesium chloride mass, logging every run and writing the Python and Matplotlib pipeline that reduced the raw traces to minutes-in-window.</p>
+        <p>I owned the project end to end. I designed the cassette geometry in Fusion 360 and iterated the printed body through several revisions of the annular heating chamber, sizing the wall thickness and chamber volume against the reaction volume it had to heat. I built the characterization rig, sealing a thermocouple into the sample well so that runs reported reaction-volume temperature rather than the much friendlier chamber-wall temperature. I then designed and executed the parameter sweep across 49 combinations of phase-change material and magnesium chloride mass, logging every run and writing the Python and Matplotlib pipeline that reduced the raw traces to minutes-in-window.</p>
         <p>Separately I developed the passive timing valve: casting PVA membranes across a range of concentrations, cast volumes, and plasticizer additions, then screening them with a tracer dye on real lateral flow sample pads so that each run reported both when the membrane opened and how cleanly it failed. At the end of the placement I ran a limited end-to-end trial through the assembled cassette and confirmed product by gel electrophoresis.</p>
       </div>
     </div>
@@ -132,8 +132,8 @@
       </div>
 
       <figure class="fig reveal">
-        <img src="assets/img/plot_r09.png" alt="Temperature versus time trace for run R09 showing the reaction volume held within the 37 to 42 degree Celsius window">
-        <figcaption><b>Fig. 4</b> &nbsp;Best configuration (R09, 1800&nbsp;mg PCM / 500&nbsp;mg MgCl<sub>2</sub>). The charge drives the volume into the window within a minute; the PCM then holds it there as it crystallizes.</figcaption>
+        <img src="assets/img/plot_r09.png" alt="Temperature versus time trace for run R09: the reaction volume rises to about 44 degrees Celsius, then decays slowly through the 37 to 42 degree Celsius window">
+        <figcaption><b>Fig. 4</b> &nbsp;Best configuration (R09, 1800&nbsp;mg PCM / 500&nbsp;mg MgCl<sub>2</sub>, syringe delivery). The charge drives the volume to roughly 44&nbsp;&deg;C within two minutes; the PCM then returns that heat slowly as it crystallizes, carrying the volume down through the 37&ndash;42&nbsp;&deg;C window for about 11 minutes before it falls out the bottom.</figcaption>
       </figure>
 
       <figure class="fig reveal">
@@ -160,14 +160,19 @@
         <p>Casting condition sets both the rupture time and how cleanly the membrane fails, so I screened PVA concentration (w/v), cast volume, and plasticizer additions by running a tracer dye on real lateral flow sample pads. Each run therefore reported two things: when the membrane opened, and how.</p>
       </div>
 
+      <figure class="fig reveal" style="max-width:340px;">
+        <img src="assets/img/pva_stock.png" alt="Bottle of poly(vinyl alcohol), Mw 85,000-124,000, 99+% hydrolyzed" width="360" height="360">
+        <figcaption><b>Fig. 7</b> &nbsp;The valve stock. Poly(vinyl alcohol), Mw 85,000&ndash;124,000, 99+% hydrolyzed. Membranes were cast from this grade across a range of concentrations, cast volumes, and plasticizer additions.</figcaption>
+      </figure>
+
       <div class="fig-pair reveal">
         <figure class="fig">
           <img src="assets/img/valve_before.jpg" alt="Three valve units mid-test with dye fully retained and sample pads dry, labeled by casting condition">
-          <figcaption><b>Fig. 7</b> &nbsp;Mid-test, before breakthrough. Dye fully retained, pads dry. Units labeled in frame by casting condition (PVA w/v %, cast volume).</figcaption>
+          <figcaption><b>Fig. 8</b> &nbsp;Mid-test, before breakthrough. Dye fully retained, pads dry. Units labeled in frame by casting condition (PVA w/v %, cast volume).</figcaption>
         </figure>
         <figure class="fig">
           <img src="assets/img/valve_after.jpg" alt="Five valve units after breakthrough showing dye fronts of differing quality on the sample pads">
-          <figcaption><b>Fig. 8</b> &nbsp;After breakthrough. The dye front on the pad distinguishes clean release (center) from partial rupture; running units in parallel exposed the build-to-build timing scatter.</figcaption>
+          <figcaption><b>Fig. 9</b> &nbsp;After breakthrough. The dye front on the pad distinguishes clean release (center) from partial rupture; running units in parallel exposed the build-to-build timing scatter.</figcaption>
         </figure>
       </div>
     </div>

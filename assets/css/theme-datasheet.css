@@ -232,6 +232,20 @@ p:last-child { margin-bottom: 0; }
   .spec > div:last-child { border-bottom: 0; }
 }
 
+/* ---------- spec sheet (stacked, labelled spec bands) ---------- */
+.specsheet {
+  border: 1px solid var(--rule); border-radius: var(--r); overflow: hidden;
+  background: var(--panel);
+}
+.specsheet__row + .specsheet__row { border-top: 1px solid var(--rule); }
+.specsheet__label {
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--muted); font-weight: 400;
+  margin: 0; padding: .7rem 1rem .55rem;
+  border-bottom: 1px solid var(--line); background: var(--paper);
+}
+.specsheet .spec { border: 0; border-radius: 0; }
+
 /* ---------- fact list ---------- */
 .facts {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
