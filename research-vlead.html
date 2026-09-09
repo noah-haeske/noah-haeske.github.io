@@ -44,7 +44,7 @@
         <source src="assets/video/vlead_rotation.mp4" type="video/mp4">
         Your browser does not support embedded video. <a href="assets/video/vlead_rotation.mp4">Download the clip</a>.
       </video>
-      <figcaption><b>Fig. 1</b> &nbsp;Bench test of the current build, dye standing in for reagent. Turning the top indexes the paper from one well to the next, so the operator advances the assay by rotating a single part rather than by aligning a sliding layer.</figcaption>
+      <figcaption><b>Fig. 1</b> Bench test of the current build, dye standing in for reagent. Turning the top advances from one reagent to the next, so the operator doesn't need to know the sequence, they just twist.</figcaption>
     </figure>
   </div>
 
@@ -85,8 +85,8 @@
         </div>
         <div class="prose">
           <h3>What I changed</h3>
-          <p>I rebuilt the device around rotation. The paper is clamped in a screw fitting and indexed between wells by turning a single part, which removes the alignment problem: a thread can only go one way, and the stops are geometric rather than judged by eye. The milled polycarbonate and the tape are both gone, replaced by printed parts that assemble without adhesive.</p>
-          <p>The point of the exercise is deployment. A device that needs a trained hand is a lab instrument no matter how good its chemistry is, so most of the design effort has gone into removing the places where an operator can get it wrong rather than into the assay itself.</p>
+          <p>I rebuilt the device around rotation. The paper is clamped in a screw fitting and reagents are released sequentially due to the geometry. The milled polycarbonate and the tape are both gone, replaced by printed parts that assemble without adhesive.</p>
+          <p>The point of the redesign is real world deployment. A device that needs a trained hand is a lab instrument no matter how good its chemistry is, so most of the design effort has gone into removing the places where an operator can get it wrong rather than into the assay itself.</p>
         </div>
       </div>
     </div>
@@ -96,7 +96,7 @@
   <section class="section">
     <div class="wrap">
       <div class="section__head">
-        <h2>The parts that replaced the slide</h2>
+        <h2>The design change</h2>
       </div>
 
       <figure class="fig reveal">
@@ -106,8 +106,8 @@
 
       <div class="split reveal">
         <div class="prose">
-          <p>The reagent wells sit in a single printed disc. Each well is a hemispherical pocket with a through-hole at its base, and an alignment pin sets the disc's orientation relative to the rest of the stack, so the sequence the paper visits is fixed at assembly rather than chosen during the run.</p>
-          <p>Above it, a threaded cap carries the paper. Tightening the cap clamps the paper against its seat, and turning the assembly is what carries the paper from one well to the next. Everything that used to be a tape joint or a hand-aligned sliding face is now either a thread or a printed feature.</p>
+          <p>The reagent wells sit in a single printed disc. Each well is a hemispherical pocket with a through-hole at its base, and an alignment pin sets the disc's orientation relative to the rest of the stack, so the sequence of reagents is fixed at assembly.</p>
+          <p>Below it, a threaded cap carries the paper. Tightening the cap clamps the paper against its seat, and turning the assembly is what dispenses the next reagent. Everything that used to be a tape joint or a hand-aligned sliding face is now either a thread or a printed feature.</p>
         </div>
 
         <figure class="fig">
@@ -149,7 +149,7 @@
       </div>
       <div class="prose narrow reveal">
         <p>The current build has been run on the bench with dye standing in for reagent, which is enough to show that the rotation indexes cleanly, that the clamp holds the paper, and that liquid goes where the geometry says it should. It is not yet enough to say anything about the assay. Running the real chemistry through the redesigned device, and doing it enough times to speak about repeatability, is the next step.</p>
-        <p>The open questions are the ordinary ones for a printed device that has to seal. Print tolerance sets how well the clamp seats, the wells have to empty without leaving volume behind, and a mechanism that is easy to turn is also easy to over-turn, so the stops need to be firm enough that an operator feels them. None of these is a reason the approach will not work, but each one is a reason the first build is not the last.</p>
+        <p></p>
       </div>
 
       <div class="btn-row reveal" style="margin-top:2.4rem;">
