@@ -221,13 +221,6 @@
   .about-row .headshot { max-width: 190px; }
 }
 
-/* ---------- layout switch, footer fine print ---------- */
-.layout-switch {
-  font-family: var(--mono); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase;
-  color: var(--faint);
-}
-.layout-switch a { color: var(--faint); text-decoration: none; border-bottom: 1px solid var(--line); }
-.layout-switch a:hover { color: var(--accent); border-color: var(--accent); }
 
 /* ============================================================
    BALANCED HOME (index.html)

@@ -9,9 +9,8 @@ project pages) is shared between them and was not touched.
 | `index-media.html` | **Media-first.** Compact title bar, then a full-bleed wall of four project tiles (two video), a dark spec plate, three media-led cards, and a six-frame contact sheet. |
 | `index-classic.html` | **The previous home page**, byte for byte. |
 
-Each page links to the other two from the footer fine print
-("Layout: balanced · media · classic"). Delete those
-`<span class="layout-switch">…</span>` lines when you no longer want them public.
+The pages do not link to each other. To look at one that is not live, open its
+file directly, for example `noahhaeske.com/index-media.html`.
 
 ## Switching which one is the home page
 
