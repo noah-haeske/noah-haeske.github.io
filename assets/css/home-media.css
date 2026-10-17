@@ -1,0 +1,283 @@
+/* ============================================================
+   Noah Haeske — media-forward home page
+   Loaded only by index.html, on top of the active theme.
+   Deleting this file and the <link> to it returns index.html
+   to plain theme styling. index-classic.html never loads it.
+   ============================================================ */
+
+:root {
+  --dark:      #0b0e12;
+  --dark-2:    #141921;
+  --dark-line: rgba(255,255,255,.15);
+  --dark-ink:  #e8ecf1;
+  --dark-mute: #97a1ad;
+  --accent-lt: #4da3e8;
+}
+
+/* full-bleed escape from .wrap */
+.bleed {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+}
+
+/* ---------- title bar above the media wall ---------- */
+.titlebar { padding: clamp(1.4rem, 3vw, 2.2rem) 0 clamp(1.1rem, 2.4vw, 1.6rem); }
+.titlebar__inner {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(1rem, 3vw, 2.5rem); align-items: end;
+}
+.titlebar h1 { margin: .1rem 0 .55rem; max-width: 18ch; }
+.titlebar__line {
+  color: var(--ink-2); font-size: clamp(.98rem, 1.4vw, 1.08rem);
+  line-height: 1.5; max-width: 56ch; margin: 0;
+}
+.titlebar .btn-row { margin-top: 0; }
+.titlebar__side { display: flex; flex-direction: column; align-items: flex-end; gap: 1rem; }
+.titlebar__side .hero__meta { margin-top: 0; width: fit-content; }
+@media (max-width: 760px) {
+  .titlebar__inner { grid-template-columns: 1fr; align-items: start; }
+  .titlebar__side { align-items: flex-start; gap: .9rem; }
+  .titlebar .btn-row { margin-top: .2rem; }
+}
+
+/* ---------- the media wall ---------- */
+.wall { background: var(--dark); border-block: 1px solid var(--rule-2); }
+.wall__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 1px; background: var(--dark-line);
+  height: clamp(380px, 62vh, 660px);
+}
+.tile:nth-child(1) { grid-column: 1; grid-row: 1 / span 2; }
+.tile:nth-child(2) { grid-column: 2; grid-row: 1 / span 2; }
+.tile:nth-child(3) { grid-column: 3; grid-row: 1; }
+.tile:nth-child(4) { grid-column: 3; grid-row: 2; }
+
+.tile {
+  position: relative; overflow: hidden; background: var(--dark-2);
+  text-decoration: none; color: var(--dark-ink); display: block; min-height: 0;
+}
+.tile img, .tile video {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .5s cubic-bezier(.2,.6,.2,1), filter .25s ease;
+  filter: saturate(.96) contrast(1.02);
+}
+.tile::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(6,9,13,.88) 0%, rgba(6,9,13,.42) 26%, rgba(6,9,13,0) 52%);
+}
+.tile:hover img, .tile:hover video,
+.tile:focus-visible img, .tile:focus-visible video { transform: scale(1.035); filter: none; }
+
+/* figure number, top-left, like a plate callout */
+.tile__fig {
+  position: absolute; top: 0; left: 0; z-index: 2;
+  font-family: var(--mono); font-size: .6rem; letter-spacing: .13em; text-transform: uppercase;
+  color: var(--dark-ink); background: rgba(6,9,13,.6);
+  backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+  padding: .34rem .6rem; border-right: 1px solid var(--dark-line); border-bottom: 1px solid var(--dark-line);
+}
+.tile__fig b { color: var(--accent-lt); font-weight: 500; }
+.tile__fig i { font-style: normal; margin-left: .5rem; }
+/* the descriptive half of the callout is the first thing to go when the
+   tile gets narrow; the figure number stays */
+@media (max-width: 900px) { .tile__fig i { display: none; } }
+
+/* caption plate, bottom-left, always legible */
+.tile__cap {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: .9rem 1rem 1rem;
+  /* the scrim carries most of it; this keeps the small type readable where a
+     tile goes bright under the caption, like vapour or a lit bench */
+  text-shadow: 0 1px 3px rgba(0,0,0,.7);
+}
+.tile__org {
+  display: block; font-family: var(--mono); font-size: .6rem; letter-spacing: .12em;
+  text-transform: uppercase; color: #c3ccd6; margin-bottom: .3rem;
+}
+.tile__name {
+  display: block; font-size: .98rem; font-weight: 600; line-height: 1.25;
+  letter-spacing: -0.01em; color: #fff; text-wrap: balance;
+}
+.tile__go {
+  display: block; font-family: var(--mono); font-size: .62rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--accent-lt);
+  margin-top: .45rem; opacity: 0; transform: translateY(4px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+.tile:hover .tile__go, .tile:focus-visible .tile__go { opacity: 1; transform: none; }
+.tile--small .tile__name { font-size: .86rem; }
+.tile--small .tile__cap { padding: .7rem .8rem .8rem; }
+/* small tiles crop tighter, so the caption needs a heavier scrim */
+.tile--small::after {
+  background: linear-gradient(to top, rgba(6,9,13,.92) 0%, rgba(6,9,13,.55) 34%, rgba(6,9,13,0) 64%);
+}
+/* a wide plate cropped into a tall cell: hold the left of the frame,
+   where the penny sits, instead of centring on empty channel */
+.tile--left img, .tile--left video { object-position: 24% center; }
+.tile:focus-visible { outline: 2px solid var(--accent-lt); outline-offset: -3px; }
+
+/* live-ish marker on the running video tiles */
+.tile__live {
+  position: absolute; top: 0; right: 0; z-index: 2; display: flex; align-items: center; gap: .4rem;
+  font-family: var(--mono); font-size: .58rem; letter-spacing: .13em; text-transform: uppercase;
+  color: var(--dark-ink); background: rgba(6,9,13,.6);
+  backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+  padding: .34rem .6rem; border-left: 1px solid var(--dark-line); border-bottom: 1px solid var(--dark-line);
+}
+.tile__live::before {
+  content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--flag);
+  box-shadow: 0 0 0 0 rgba(194,65,12,.6); animation: pulse 2.4s infinite;
+}
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(194,65,12,.55); }
+  70%  { box-shadow: 0 0 0 6px rgba(194,65,12,0); }
+  100% { box-shadow: 0 0 0 0 rgba(194,65,12,0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tile__live::before { animation: none; }
+  .tile img, .tile video { transition: none; }
+}
+
+@media (max-width: 900px) {
+  .wall__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto auto auto; height: auto; gap: 1px;
+  }
+  .tile:nth-child(1) { grid-column: 1 / span 2; grid-row: 1; aspect-ratio: 16 / 10; }
+  .tile:nth-child(2) { grid-column: 1; grid-row: 2; aspect-ratio: 4 / 5; }
+  .tile:nth-child(3) { grid-column: 2; grid-row: 2; aspect-ratio: 4 / 5; }
+  .tile:nth-child(4) { grid-column: 1 / span 2; grid-row: 3; aspect-ratio: 16 / 7; }
+}
+
+/* ---------- dark spec plate, flush under the wall ---------- */
+.plate { background: var(--dark-2); border-bottom: 1px solid var(--rule-2); }
+.plate .spec {
+  background: transparent; border: 0; border-radius: 0;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+.plate .spec > div { border-right: 1px solid var(--dark-line); padding: .85rem 1rem; }
+.plate .spec > div:first-child { padding-left: 0; }
+.plate .spec > div:last-child { border-right: 0; }
+.plate .spec dt { color: var(--dark-mute); }
+.plate .spec dd { color: var(--dark-ink); }
+@media (max-width: 620px) {
+  .plate .spec > div { border-right: 0; border-bottom: 1px solid var(--dark-line); padding-left: 0; }
+  .plate .spec > div:last-child { border-bottom: 0; }
+}
+
+/* ---------- selected work: media does the talking ---------- */
+.cards--media .card__media { aspect-ratio: 16 / 11; }
+.cards--media .card__media img,
+.cards--media .card__media video { transition: transform .5s cubic-bezier(.2,.6,.2,1); }
+.cards--media a.card:hover .card__media img,
+.cards--media a.card:hover .card__media video { transform: scale(1.04); }
+.cards--media .card__media { position: relative; }
+.cards--media .card__idx {
+  position: absolute; top: 0; left: 0; z-index: 2;
+  font-family: var(--mono); font-size: .58rem; letter-spacing: .13em; text-transform: uppercase;
+  color: #fff; background: rgba(6,9,13,.62); padding: .3rem .55rem;
+}
+.cards--media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* a published figure is not a photograph: letterbox it rather than crop
+   through the panel labels */
+.card__media--plate { background: var(--dark); }
+.card__media--plate img { object-fit: contain; }
+
+/* ---------- contact sheet strip ---------- */
+.sheet {
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+}
+@media (max-width: 1060px) { .sheet { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 560px)  { .sheet { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.sheet__cell {
+  background: var(--panel); text-decoration: none; color: inherit;
+  display: flex; flex-direction: column;
+}
+.sheet__cell:hover { background: #f2f6fa; }
+.sheet__cell figure { overflow: hidden; background: #e9ecf0; aspect-ratio: 4 / 3; }
+.sheet__cell img, .sheet__cell video {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .5s cubic-bezier(.2,.6,.2,1);
+}
+.sheet__cell:hover img, .sheet__cell:hover video { transform: scale(1.05); }
+.sheet__cap {
+  font-family: var(--mono); font-size: .6rem; letter-spacing: .07em; text-transform: uppercase;
+  color: var(--muted); padding: .5rem .6rem .55rem; border-top: 1px solid var(--line);
+  display: flex; gap: .4rem; align-items: baseline; line-height: 1.45; flex: 1;
+}
+.sheet__cap b { color: var(--accent); font-weight: 500; }
+.sheet__cell:hover .sheet__cap { color: var(--ink-2); }
+
+/* ---------- about row with small portrait ---------- */
+.about-row {
+  display: grid; grid-template-columns: minmax(0, 2.1fr) minmax(0, 1fr);
+  gap: clamp(1.4rem, 4vw, 3rem); align-items: start;
+}
+.about-row .headshot { max-width: 230px; }
+@media (max-width: 760px) {
+  .about-row { grid-template-columns: 1fr; }
+  .about-row .headshot { max-width: 190px; }
+}
+
+/* ---------- layout switch, footer fine print ---------- */
+.layout-switch {
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--faint);
+}
+.layout-switch a { color: var(--faint); text-decoration: none; border-bottom: 1px solid var(--line); }
+.layout-switch a:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ============================================================
+   BALANCED HOME (index.html)
+   The original hero structure, with the portrait swapped for a
+   running clip and the work cards given more room for media.
+   Classes above this block belong to index-media.html.
+   ============================================================ */
+
+.hero__grid--media { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: center; }
+@media (max-width: 880px) { .hero__grid--media { grid-template-columns: 1fr; } }
+
+.hero-media {
+  border: 1px solid var(--rule); border-radius: var(--r);
+  background: var(--panel); padding: .5rem; margin: 0;
+}
+.hero-media__frame { position: relative; overflow: hidden; background: var(--dark); aspect-ratio: 16 / 9; }
+.hero-media video, .hero-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-media figcaption {
+  margin-top: .55rem; padding-top: .5rem; border-top: 1px solid var(--line);
+  font-size: .8rem; line-height: 1.5; color: var(--muted);
+}
+.hero-media figcaption b {
+  color: var(--accent); font-weight: 500; font-family: var(--mono);
+  font-size: .66rem; letter-spacing: .09em; text-transform: uppercase; margin-right: .5rem;
+}
+/* a quiet marker that the frame is moving, not a still */
+.hero-media__state {
+  position: absolute; top: 0; right: 0; z-index: 2; display: flex; align-items: center; gap: .4rem;
+  font-family: var(--mono); font-size: .58rem; letter-spacing: .13em; text-transform: uppercase;
+  color: #e8ecf1; background: rgba(6,9,13,.58);
+  backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+  padding: .3rem .55rem; border-left: 1px solid rgba(255,255,255,.15); border-bottom: 1px solid rgba(255,255,255,.15);
+}
+.hero-media__state::before {
+  content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--flag);
+}
+
+/* work cards: a little more image, same frame */
+.cards--roomy .card__media { aspect-ratio: 16 / 10; overflow: hidden; }
+.cards--roomy .card__media img,
+.cards--roomy .card__media video { transition: transform .5s cubic-bezier(.2,.6,.2,1); }
+.cards--roomy a.card:hover .card__media img,
+.cards--roomy a.card:hover .card__media video { transform: scale(1.035); }
+.cards--roomy video { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* a render on white is an object, not a scene: show all of it rather than
+   cropping through the part */
+.card__media--white { background: #fff; }
+.card__media--white img { object-fit: contain; padding: .4rem; }
+/* three tags do not fill the row, so the frame hugs them instead */
+.hero__grid--media .hero__meta { width: fit-content; }
+@media (prefers-reduced-motion: reduce) {
+  .cards--roomy .card__media img, .cards--roomy .card__media video { transition: none; }
+}
