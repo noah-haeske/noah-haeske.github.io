@@ -70,11 +70,12 @@
       <section class="specsheet__row">
         <p class="specsheet__label">PDR baseline</p>
         <dl class="spec specsheet__items">
-          <div><dt>Length</dt><dd>82&nbsp;in</dd></div>
-          <div><dt>Max diameter</dt><dd>6&nbsp;in</dd></div>
-          <div><dt>Wet mass</dt><dd>53.9&nbsp;lb</dd></div>
+          <div><dt>Length</dt><dd>98&nbsp;in</dd></div>
+          <div><dt>Max diameter</dt><dd>6.17&nbsp;in</dd></div>
+          <div><dt>Mass with motor</dt><dd>76.8&nbsp;lb</dd></div>
+          <div><dt>Mass without motor</dt><dd>44.3&nbsp;lb</dd></div>
           <div><dt>Target</dt><dd>Mach 1.5</dd></div>
-          <div><dt>Static margin</dt><dd>1.04&nbsp;cal at M&nbsp;=&nbsp;0.3</dd></div>
+          <div><dt>Static margin</dt><dd>1.52&nbsp;cal at M&nbsp;=&nbsp;0.3</dd></div>
         </dl>
       </section>
     </div>
@@ -87,18 +88,16 @@
         <h2>Why fly it small first</h2>
       </div>
 
-      <div class="split reveal">
-        <div class="prose">
-          <p>I designed a subscale solid-motor test vehicle that reaches Mach&nbsp;1.5, built to validate active canard control across both subsonic and supersonic flight regimes. Canard authority changes character as the vehicle goes transonic, so a control scheme that behaves on paper still has to be flown; the subscale vehicle is the cheapest way to put the controller in front of that transition before it flies on the full-scale airframe.</p>
-          <p>The subscale keeps the parts of the full-scale vehicle that the test is about and drops the parts that make it expensive. The nose cone, recovery, avionics bay, and the fin can carry over. The liquid propellant tank and motor come out and are replaced by a solid motor.</p>
-          <p>This vehicle is currently under preliminary design review with full build expected in mid to late fall 2026.</p>
-        </div>
-
-        <figure class="fig">
-          <img src="assets/img/frl_subscale_ork.png" alt="OpenRocket side view of the Vertigo Subscale vehicle: 82 in long, 6 in maximum diameter, with a conical nose cone, recovery bay, canards forward of the aft fin can, and four aft fins. CG marked at 49.1 in and CP at 55.3 in.">
-          <figcaption><b>Fig. 3</b> &nbsp;PDR baseline layout. The forward set of fins is the canard control surface; CG at 49.1&nbsp;in and CP at 55.3&nbsp;in give 1.04&nbsp;cal of static margin at M&nbsp;=&nbsp;0.3.</figcaption>
-        </figure>
+      <div class="prose reveal">
+        <p>I designed a subscale solid-motor test vehicle that reaches Mach&nbsp;1.5, built to validate active canard control across both subsonic and supersonic flight regimes. Canard authority changes character as the vehicle goes transonic, so a control scheme that behaves on paper still has to be flown; the subscale vehicle is the cheapest way to put the controller in front of that transition before it flies on the full-scale airframe.</p>
+        <p>The subscale keeps the parts of the full-scale vehicle that the test is about and drops the parts that make it expensive. The nose cone, recovery, avionics bay, and the fin can carry over. The liquid propellant tank and motor come out and are replaced by a solid motor.</p>
+        <p>This vehicle is currently under preliminary design review with full build expected in mid to late fall 2026.</p>
       </div>
+
+      <figure class="fig reveal">
+        <img src="assets/img/frl_subscale_ork2.png" alt="OpenRocket side view of the Vertigo Subscale vehicle: 98 in long, 6.17 in maximum diameter, with the recovery bay behind the nose cone, canards forward on the airframe, the solid motor running to the tail, and the aft fins. CG marked at 53.192 in and CP at 62.544 in; 1.52 cal of stability at M = 0.3.">
+        <figcaption><b>Fig. 3</b> &nbsp;Current OpenRocket layout. The forward set of fins is the canard control surface; CG at 53.2&nbsp;in and CP at 62.5&nbsp;in give 1.52&nbsp;cal of static margin at M&nbsp;=&nbsp;0.3. Mass is 76.8&nbsp;lb with the motor and 44.3&nbsp;lb without.</figcaption>
+      </figure>
 
       <figure class="fig reveal">
         <img src="assets/img/frl_fullscale_profile.png" alt="OpenRocket simulation of the full-scale vehicle: altitude, vertical velocity, and vertical acceleration against time. Altitude peaks near 30,800 ft at about 42 s; velocity peaks near 2,000 ft/s at motor burnout around 6 s. Hand annotations along the time axis mark the subsonic, transonic, supersonic, transonic, and subsonic phases of the boost and coast.">
