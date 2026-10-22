@@ -259,6 +259,10 @@
 }
 
 /* work cards: a little more image, same frame */
+/* four cards: a 2 x 2 grid instead of three across with one left over */
+@media (min-width: 700px) {
+  .cards--roomy { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 .cards--roomy .card__media { aspect-ratio: 16 / 10; overflow: hidden; }
 .cards--roomy .card__media img,
 .cards--roomy .card__media video { transition: transform .5s cubic-bezier(.2,.6,.2,1); }
