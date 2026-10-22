@@ -9,6 +9,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<style>
+  /* Size the two lead images by aspect ratio so they sit at the same height side by side */
+  @media (min-width: 700px) {
+    .fig-pair--lead { grid-template-columns: 1fr 1.56fr; }
+  }
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -36,6 +42,20 @@
       <p class="lede">This is what I am working on now. A Mach&nbsp;1.5 subscale vehicle whose job is to fly active canard control through the transonic transition, so the controller meets that transition on a cheap airframe instead of on the full-scale one.</p>
     </div>
   </section>
+
+  <!-- ============ LEAD IMAGE ============ -->
+  <div class="wrap">
+    <div class="fig-pair fig-pair--lead reveal" style="margin-top:0;">
+      <figure class="fig">
+        <img src="assets/img/frl_canard_side.png" alt="CAD side view of the canard actuation mechanism inside the body tube: a central bevel gear set drives shafts out through bearing blocks and shaft collars to the two canards on either side of the airframe, all mounted on a bulkhead">
+        <figcaption><b>Fig. 1</b> &nbsp;Canard actuation mechanism, side view. The gear set at the center drives the shafts that run out through the airframe wall to each canard.</figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="assets/img/frl_canard_top.png" alt="CAD overhead view of the canard actuation mechanism on its circular bulkhead: a center pinion between two bevel gears, shafts supported by bearing blocks running out to the canards on each side, and two rectangular pass-through cutouts in the plate">
+        <figcaption><b>Fig. 2</b> &nbsp;The same mechanism from above, on its mounting bulkhead.</figcaption>
+      </figure>
+    </div>
+  </div>
 
   <!-- ============ STATUS BANNER ============ -->
   <div class="wrap">
@@ -78,9 +98,14 @@
 
         <figure class="fig">
           <img src="assets/img/frl_subscale_ork.png" alt="OpenRocket side view of the Vertigo Subscale vehicle: 82 in long, 6 in maximum diameter, with a conical nose cone, recovery bay, canards forward of the aft fin can, and four aft fins. CG marked at 49.1 in and CP at 55.3 in.">
-          <figcaption><b>Fig. 1</b> &nbsp;PDR baseline layout. The forward set of fins is the canard control surface; CG at 49.1&nbsp;in and CP at 55.3&nbsp;in give 1.04&nbsp;cal of static margin at M&nbsp;=&nbsp;0.3.</figcaption>
+          <figcaption><b>Fig. 3</b> &nbsp;PDR baseline layout. The forward set of fins is the canard control surface; CG at 49.1&nbsp;in and CP at 55.3&nbsp;in give 1.04&nbsp;cal of static margin at M&nbsp;=&nbsp;0.3.</figcaption>
         </figure>
       </div>
+
+      <figure class="fig reveal">
+        <img src="assets/img/frl_fullscale_profile.png" alt="OpenRocket simulation of the full-scale vehicle: altitude, vertical velocity, and vertical acceleration against time. Altitude peaks near 30,800 ft at about 42 s; velocity peaks near 2,000 ft/s at motor burnout around 6 s. Hand annotations along the time axis mark the subsonic, transonic, supersonic, transonic, and subsonic phases of the boost and coast.">
+        <figcaption><b>Fig. 4</b> &nbsp;Simulated flight profile of the full-scale vehicle. The annotations along the time axis mark where it passes from subsonic through transonic to supersonic and back down. The subscale is built to recreate this profile, so its systems see the full range of dynamics the full-scale vehicle will.</figcaption>
+      </figure>
     </div>
   </section>
 
