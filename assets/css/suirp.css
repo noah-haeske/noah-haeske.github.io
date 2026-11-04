@@ -195,7 +195,8 @@ figure { margin: 0; }
 .photo { margin: 2rem 0; }
 .photo img { width: 100%; border-radius: 2px; cursor: zoom-in; background: var(--paper-2); }
 .photo figcaption { font-family: var(--hand); font-size: 1.3rem; line-height: 1.2; color: var(--ink-2); margin-top: .55rem; text-align: center; }
-.photo--bleed { width: min(calc(100vw - 2 * var(--gut)), var(--max)); margin-left: 50%; transform: translateX(-50%); }
+.photo--bleed { width: 100%; margin-inline: auto; }
+.photo--doc.photo--bleed img { width: auto; max-width: 100%; margin-inline: auto; }
 .photo--doc img { background: #fff; padding: .6rem; border: 1px solid var(--line); }
 .photo--small { max-width: 360px; margin-inline: auto; }
 
