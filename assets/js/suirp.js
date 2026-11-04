@@ -1,42 +1,62 @@
-/* SUIRP journal: All / Research / Travel filter */
+/* SUIRP travel journal: fade-in, current-week nav, photo lightbox */
 (function () {
   'use strict';
-  var bar = document.querySelector('.j-filter');
-  if (!bar) return;
-  var entries = document.querySelectorAll('.entry');
-  var months = document.querySelectorAll('.j-month');
-  var buttons = bar.querySelectorAll('button');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO = 'IntersectionObserver' in window;
 
-  // Fill the counts on each button from the entries actually on the page.
-  Array.prototype.forEach.call(buttons, function (b) {
-    var k = b.getAttribute('data-kind');
-    var n = k === 'all' ? entries.length : document.querySelectorAll('.entry[data-kind="' + k + '"]').length;
-    var c = b.querySelector('.j-count');
-    if (c) c.textContent = n;
-  });
-
-  function apply(kind) {
-    Array.prototype.forEach.call(buttons, function (b) {
-      b.setAttribute('aria-pressed', String(b.getAttribute('data-kind') === kind));
-    });
-    Array.prototype.forEach.call(entries, function (e) {
-      var show = kind === 'all' || e.getAttribute('data-kind') === kind;
-      e.hidden = !show;
-      if (show) e.classList.add('is-in');
-    });
-    // Hide a month heading when every entry under it is filtered out.
-    Array.prototype.forEach.call(months, function (m) {
-      var el = m.nextElementSibling, any = false;
-      while (el && !el.classList.contains('j-month')) {
-        if (el.classList.contains('entry') && !el.hidden) { any = true; break; }
-        el = el.nextElementSibling;
-      }
-      m.hidden = !any;
-    });
+  // --- fade in ---
+  var fades = document.querySelectorAll('.fade');
+  if (reduce || !hasIO) {
+    Array.prototype.forEach.call(fades, function (el) { el.classList.add('is-in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.05 });
+    Array.prototype.forEach.call(fades, function (el) { io.observe(el); });
   }
 
-  bar.addEventListener('click', function (e) {
-    var b = e.target.closest('button');
-    if (b) apply(b.getAttribute('data-kind'));
+  // --- highlight the week you are reading ---
+  var links = document.querySelectorAll('.weeknav a[href^="#week-"]');
+  if (hasIO && links.length) {
+    var byId = {};
+    Array.prototype.forEach.call(links, function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        Array.prototype.forEach.call(links, function (a) { a.classList.remove('is-current'); });
+        var a = byId[e.target.id];
+        if (a) {
+          a.classList.add('is-current');
+          if (a.scrollIntoView && !reduce) a.parentNode.parentNode.scrollTo({ left: a.offsetLeft - 40, behavior: 'smooth' });
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    Array.prototype.forEach.call(document.querySelectorAll('.week'), function (s) { spy.observe(s); });
+  }
+
+  // --- lightbox ---
+  var box = document.createElement('div');
+  box.className = 'lightbox';
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  box.setAttribute('aria-label', 'Photo');
+  box.innerHTML = '<img alt=""><p></p>';
+  document.body.appendChild(box);
+  var bigImg = box.querySelector('img'), cap = box.querySelector('p'), last = null;
+
+  function close() { box.classList.remove('is-open'); if (last) last.focus(); }
+  document.addEventListener('click', function (e) {
+    var img = e.target.closest('.photo img, .polaroid img');
+    if (!img) return;
+    last = img;
+    bigImg.src = img.currentSrc || img.src;
+    bigImg.alt = img.alt;
+    var fc = img.closest('figure').querySelector('figcaption');
+    cap.textContent = fc ? fc.textContent : '';
+    box.classList.add('is-open');
   });
+  box.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && box.classList.contains('is-open')) close(); });
 })();
