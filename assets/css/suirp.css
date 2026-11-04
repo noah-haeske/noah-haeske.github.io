@@ -1,0 +1,99 @@
+/* ============================================================
+   SUIRP ePortfolio: journal layout for suirp.html
+   Loaded after style.css. Uses only the tokens every theme
+   defines (--ink, --ink-2, --muted, --line, --accent, --mono,
+   --sans, --r), with fallbacks for the panel colour, so it
+   works under all three themes.
+   ============================================================ */
+
+.j-panel { background: var(--panel, var(--surface, #fff)); }
+
+/* ---------- hero ---------- */
+.j-hero {
+  display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: clamp(1.6rem, 4vw, 3rem); align-items: start;
+}
+.j-hero .fig { margin: 0; }
+.j-hero .fig img { width: 100%; aspect-ratio: 6 / 7; object-fit: cover; }
+.j-hero .specsheet { margin-top: 1.6rem; }
+@media (max-width: 820px) {
+  .j-hero { grid-template-columns: 1fr; }
+  .j-hero .fig { max-width: 420px; }
+}
+
+/* ---------- filter bar ---------- */
+.j-filter {
+  display: inline-flex; flex-wrap: wrap; margin: 0 0 1.6rem;
+  border: 1px solid var(--line); border-radius: var(--r);
+  background: var(--panel, var(--surface, #fff));
+}
+.j-filter button {
+  appearance: none; background: none; border: 0; cursor: pointer;
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ink-2); padding: .55rem 1rem; border-right: 1px solid var(--line);
+}
+.j-filter button:last-child { border-right: 0; }
+.j-filter button:hover { color: var(--accent); }
+.j-filter button[aria-pressed="true"] { color: var(--accent); font-weight: 500; box-shadow: inset 0 -2px 0 var(--accent); }
+.j-filter .j-count { color: var(--muted); margin-left: .35rem; font-weight: 400; }
+
+/* ---------- month divider ---------- */
+.j-month {
+  display: flex; align-items: baseline; gap: 1rem;
+  margin: 2.4rem 0 0; padding: 0 0 .6rem; border-bottom: 1px solid var(--ink);
+}
+.j-month:first-of-type { margin-top: 0; }
+.j-month h2 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
+.j-month span {
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .09em; text-transform: uppercase; color: var(--muted);
+}
+
+/* ---------- entry ---------- */
+.entry {
+  display: grid; grid-template-columns: 150px minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 2rem);
+  padding: 1.6rem 0; border-bottom: 1px solid var(--line);
+}
+.entry[hidden] { display: none; }
+
+.entry__date { font-family: var(--mono); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.entry__day { display: block; font-size: 2rem; line-height: 1; font-weight: 500; color: var(--ink); letter-spacing: -0.02em; }
+.entry__day small { font-size: 1rem; color: var(--muted); font-weight: 400; }
+.entry__dow, .entry__wk, .entry__where {
+  display: block; font-size: .64rem; letter-spacing: .09em; text-transform: uppercase; margin-top: .45rem;
+}
+.entry__dow { color: var(--muted); }
+.entry__wk { color: var(--faint, var(--muted)); }
+.entry__where { color: var(--ink-2); padding-top: .45rem; border-top: 1px solid var(--line); margin-top: .6rem; }
+
+.entry__body h3 { font-size: clamp(1.05rem, 1.6vw, 1.2rem); letter-spacing: -0.012em; margin: .45rem 0 .7rem; }
+.entry__body .prose > p { max-width: 70ch; }
+.entry__body .fig, .entry__body .fig-pair { margin: 1.2rem 0 0; }
+.entry__body .fig--narrow { max-width: 400px; }
+.entry__body .fig--wide img { width: 100%; }
+.entry__body .fig-pair .fig img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+.entry__body .fig-pair--land .fig img { aspect-ratio: 4 / 3; }
+.entry__body .fig-pair--free .fig img { aspect-ratio: auto; }
+
+.tag {
+  display: inline-block; font-family: var(--mono); font-size: .6rem; letter-spacing: .1em;
+  text-transform: uppercase; padding: .16rem .45rem; border-radius: var(--r); border: 1px solid;
+}
+.tag--research { color: var(--accent); border-color: currentColor; }
+.tag--travel { color: #2f6b4a; border-color: currentColor; }
+
+.entry__link {
+  display: inline-block; margin-top: 1rem;
+  font-family: var(--mono); font-size: .66rem; letter-spacing: .08em; text-transform: uppercase;
+}
+
+@media (max-width: 720px) {
+  .entry { grid-template-columns: 1fr; gap: .6rem; }
+  .entry__date { display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem .9rem; }
+  .entry__day { font-size: 1.5rem; }
+  .entry__dow, .entry__wk, .entry__where { margin-top: 0; }
+  .entry__where { border-top: 0; padding-top: 0; }
+}
+
+/* ---------- reflection columns ---------- */
+.j-reflect .prose > h3:first-child { margin-top: 0; }
