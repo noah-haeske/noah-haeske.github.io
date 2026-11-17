@@ -4,15 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Supersonic Active Control Testing Vehicle &middot; Noah Haeske</title>
-<meta name="description" content="Current project: a Mach 1.5 subscale solid-motor vehicle built to fly active canard control through the transonic transition before it flies on the full-scale airframe. Florida Rocket Lab, University of Florida.">
+<meta name="description" content="Current project: Dizzy, a Mach 1.5, 20,000 ft subscale solid-motor vehicle that flies the full-scale vehicle's canards, recovery, and avionics before the full-scale vehicle does. Florida Rocket Lab, University of Florida.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-  /* Size the two lead images by aspect ratio so they sit at the same height side by side */
+  /* Page-local: the impulse estimate and the small data tables */
+  .eq {
+    font-family: var(--mono); font-size: .86rem; line-height: 1.7;
+    border-left: 2px solid var(--rule); padding: .5rem 0 .5rem 1rem; margin: 1.2rem 0;
+    overflow-x: auto;
+  }
+  .eq span { display: block; white-space: nowrap; }
+  .table-wrap { overflow-x: auto; margin: 1.8rem 0; }
+  .transcript td.num, .transcript th.num { text-align: center; width: 3rem; font-variant-numeric: tabular-nums; }
   @media (min-width: 700px) {
-    .fig-pair--lead { grid-template-columns: 1fr 1.56fr; }
+    .fig-pair--fwd { grid-template-columns: 1fr 1.25fr; }
   }
 </style>
 </head>
@@ -37,22 +45,16 @@
     <div class="wrap">
       <p class="label"><a href="projects.html" style="color:inherit;text-decoration:none;">&larr; Projects</a> &nbsp;/&nbsp; Florida Rocket Lab &nbsp;/&nbsp; In progress</p>
       <h1>Supersonic Active Control Testing Vehicle</h1>
-      <p class="lede">This is what I am working on now. A Mach&nbsp;1.5 subscale vehicle whose job is to fly active canard control through the transonic transition, so the controller meets that transition on a cheap airframe instead of on the full-scale one.</p>
+      <p class="lede">This is what I am working on now. Dizzy is a Mach&nbsp;1.5, 20,000&nbsp;ft subscale vehicle that flies the full-scale rocket's nose cone, avionics, recovery, and canards on a commercial solid motor, so the canard controller meets the transonic transition on a cheap airframe instead of on the full-scale one.</p>
     </div>
   </section>
 
   <!-- ============ LEAD IMAGE ============ -->
   <div class="wrap">
-    <div class="fig-pair fig-pair--lead reveal" style="margin-top:0;">
-      <figure class="fig">
-        <img src="assets/img/frl_canard_side.png" alt="CAD side view of the canard actuation mechanism inside the body tube: a central bevel gear set drives shafts out through bearing blocks and shaft collars to the two canards on either side of the airframe, all mounted on a bulkhead">
-        <figcaption><b>Fig. 1</b> &nbsp;Canard actuation mechanism, side view. The gear set at the center drives the shafts that run out through the airframe wall to each canard.</figcaption>
-      </figure>
-      <figure class="fig">
-        <img src="assets/img/frl_canard_top.png" alt="CAD overhead view of the canard actuation mechanism on its circular bulkhead: a center pinion between two bevel gears, shafts supported by bearing blocks running out to the canards on each side, and two rectangular pass-through cutouts in the plate">
-        <figcaption><b>Fig. 2</b> &nbsp;The same mechanism from above, on its mounting bulkhead.</figcaption>
-      </figure>
-    </div>
+    <figure class="fig reveal" style="margin-top:0;">
+      <img src="assets/img/frl_dizzy_render.jpg" alt="CAD render of Dizzy from the side: swept carbon fiber fins at the aft end, a red fiberglass body tube over the motor, then the canard section and a silver nose cone">
+      <figcaption><b>Fig. 1</b> &nbsp;Dizzy at concept design review. Aft to fore: the full-scale vehicle's fin can, the solid motor section, the canards, and the unmodified full-scale forward sections.</figcaption>
+    </figure>
   </div>
 
   <!-- ============ STATUS BANNER ============ -->
@@ -61,21 +63,31 @@
       <section class="specsheet__row">
         <p class="specsheet__label">Status &middot; active</p>
         <dl class="spec specsheet__items">
-          <div><dt>Stage</dt><dd>Preliminary design review</dd></div>
+          <div><dt>Stage</dt><dd>Concept design review &rarr; PDR 30&nbsp;Nov&nbsp;2026</dd></div>
+          <div><dt>Target launch</dt><dd>Late Feb 2027, North Texas</dd></div>
           <div><dt>Organization</dt><dd>Florida Rocket Lab, University of Florida</dd></div>
           <div><dt>Role</dt><dd>Flight Vehicles Engineer</dd></div>
-          <div><dt>Started</dt><dd>2026&ndash;27 vehicle cycle</dd></div>
         </dl>
       </section>
       <section class="specsheet__row">
-        <p class="specsheet__label">PDR baseline</p>
+        <p class="specsheet__label">Vehicle (OpenRocket)</p>
         <dl class="spec specsheet__items">
-          <div><dt>Length</dt><dd>98&nbsp;in</dd></div>
+          <div><dt>Length</dt><dd>95.6&nbsp;in</dd></div>
           <div><dt>Max diameter</dt><dd>6.17&nbsp;in</dd></div>
-          <div><dt>Mass with motor</dt><dd>76.8&nbsp;lb</dd></div>
-          <div><dt>Mass without motor</dt><dd>44.3&nbsp;lb</dd></div>
-          <div><dt>Target</dt><dd>Mach 1.5</dd></div>
-          <div><dt>Static margin</dt><dd>1.52&nbsp;cal at M&nbsp;=&nbsp;0.3</dd></div>
+          <div><dt>Mass with motor</dt><dd>68.3&nbsp;lb</dd></div>
+          <div><dt>Mass without motor</dt><dd>38.2&nbsp;lb</dd></div>
+          <div><dt>Motor</dt><dd>AMW N4000BB, 98&nbsp;mm</dd></div>
+          <div><dt>Static margin</dt><dd>2.21&nbsp;cal at M&nbsp;=&nbsp;0.3</dd></div>
+        </dl>
+      </section>
+      <section class="specsheet__row">
+        <p class="specsheet__label">Predicted flight</p>
+        <dl class="spec specsheet__items">
+          <div><dt>Apogee</dt><dd>20,465&nbsp;ft</dd></div>
+          <div><dt>Max velocity</dt><dd>466&nbsp;m/s (M&nbsp;1.45)</dd></div>
+          <div><dt>Max acceleration</dt><dd>17.7&nbsp;g</dd></div>
+          <div><dt>Burn time</dt><dd>4.1&nbsp;s</dd></div>
+          <div><dt>Liftoff T/W</dt><dd>18 : 1</dd></div>
         </dl>
       </section>
     </div>
@@ -89,20 +101,185 @@
       </div>
 
       <div class="prose reveal">
-        <p>I designed a subscale solid-motor test vehicle that reaches Mach&nbsp;1.5, built to validate active canard control across both subsonic and supersonic flight regimes. Canard authority changes character as the vehicle goes transonic, so a control scheme that behaves on paper still has to be flown; the subscale vehicle is the cheapest way to put the controller in front of that transition before it flies on the full-scale airframe.</p>
-        <p>The subscale keeps the parts of the full-scale vehicle that the test is about and drops the parts that make it expensive. The nose cone, recovery, avionics bay, and the fin can carry over. The liquid propellant tank and motor come out and are replaced by a solid motor.</p>
-        <p>This vehicle is currently under preliminary design review with full build expected in mid to late fall 2026.</p>
+        <p>The full-scale vehicle, Vertigo, steers with active canards. Canard authority changes character as a vehicle goes transonic, so a control scheme that behaves on paper still has to be flown. Dizzy is the cheapest way to put the controller in front of that transition before it flies on the full-scale airframe.</p>
+        <p>At concept design review the approach got simpler. Everything forward of the propellant tank is carried over from Vertigo exactly as it is: nose cone, recovery bay, avionics, and the canard section. The fin can carries over too. Only the liquid propulsion system comes out, replaced by a 98&nbsp;mm commercial solid motor inside a short body tube. Dizzy is not a stand-in for the full-scale hardware; it is the full-scale hardware on a different motor.</p>
       </div>
 
       <figure class="fig reveal">
-        <img src="assets/img/frl_subscale_ork2.png" alt="OpenRocket side view of the Vertigo Subscale vehicle: 98 in long, 6.17 in maximum diameter, with the recovery bay behind the nose cone, canards forward on the airframe, the solid motor running to the tail, and the aft fins. CG marked at 53.192 in and CP at 62.544 in; 1.52 cal of stability at M = 0.3.">
-        <figcaption><b>Fig. 3</b> &nbsp;Current OpenRocket layout. The forward set of fins is the canard control surface; CG at 53.2&nbsp;in and CP at 62.5&nbsp;in give 1.52&nbsp;cal of static margin at M&nbsp;=&nbsp;0.3. Mass is 76.8&nbsp;lb with the motor and 44.3&nbsp;lb without.</figcaption>
+        <img src="assets/img/frl_dizzy_cutaway.jpg" alt="CAD section view of Dizzy along its length, showing the motor case filling the aft body tube, the bulkhead and retaining ring ahead of it, and the canard mechanism, avionics, and recovery hardware inside the forward sections">
+        <figcaption><b>Fig. 2</b> &nbsp;Section view. The motor fills the aft airframe; everything ahead of the forward bulkhead is unmodified Vertigo hardware.</figcaption>
       </figure>
+
+      <div class="table-wrap reveal">
+        <table class="transcript">
+          <caption>Test objectives and the data each one buys</caption>
+          <thead>
+            <tr><th>What Dizzy has to do</th><th>Data acquired</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Fly a 6&nbsp;in airframe with the real fins and canards</td><td>Whole-vehicle drag coefficient; lift coefficients of the fins and canards</td></tr>
+            <tr><td>Fly a roll program on the canards and reach Mach&nbsp;1.5</td><td>Normal force coefficients of the fins and canards, roll damping coefficients, stability margin, vibration, roll reversal</td></tr>
+            <tr><td>Fly the full Vertigo forward section</td><td>Flight test of the reefed recovery system and the avionics; a full rehearsal of launch operations</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="fig-pair reveal">
+        <figure class="fig">
+          <img src="assets/img/frl_canard_side.png" alt="CAD side view of the canard actuation mechanism inside the body tube: a central bevel gear set drives shafts out through bearing blocks and shaft collars to the two canards on either side of the airframe, all mounted on a bulkhead">
+          <figcaption><b>Fig. 3</b> &nbsp;Canard actuation mechanism, side view. The gear set at the center drives the shafts that run out through the airframe wall to each canard.</figcaption>
+        </figure>
+        <figure class="fig">
+          <img src="assets/img/frl_canard_top.png" alt="CAD overhead view of the canard actuation mechanism on its circular bulkhead: a center pinion between two bevel gears, shafts supported by bearing blocks running out to the canards on each side, and two rectangular pass-through cutouts in the plate">
+          <figcaption><b>Fig. 4</b> &nbsp;The same mechanism from above, on its mounting bulkhead.</figcaption>
+        </figure>
+      </div>
 
       <figure class="fig reveal">
         <img src="assets/img/frl_fullscale_profile.png" alt="OpenRocket simulation of the full-scale vehicle: altitude, vertical velocity, and vertical acceleration against time. Altitude peaks near 30,800 ft at about 42 s; velocity peaks near 2,000 ft/s at motor burnout around 6 s. Hand annotations along the time axis mark the subsonic, transonic, supersonic, transonic, and subsonic phases of the boost and coast.">
-        <figcaption><b>Fig. 4</b> &nbsp;Simulated flight profile of the full-scale vehicle. The annotations along the time axis mark where it passes from subsonic through transonic to supersonic and back down. The subscale is built to recreate this profile, so its systems see the full range of dynamics the full-scale vehicle will.</figcaption>
+        <figcaption><b>Fig. 5</b> &nbsp;Simulated flight profile of the full-scale vehicle. The annotations along the time axis mark where it passes from subsonic through transonic to supersonic and back down. Dizzy is sized to recreate this profile, so the canards and avionics see the same range of dynamics they will on Vertigo.</figcaption>
       </figure>
+    </div>
+  </section>
+
+  <!-- ============ MOTOR ============ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>Sizing and sourcing the motor</h2>
+      </div>
+
+      <div class="prose reveal">
+        <p>A lower bound on total impulse comes from the momentum the vehicle needs at burnout plus the gravity loss during the burn, with drag left out:</p>
+        <p class="eq"><span>I<sub>total</sub> &ge; m<sub>bo</sub>v<sub>bo</sub> + m&#772; g t<sub>b</sub></span><span>&asymp; (20.3&nbsp;kg)(515&nbsp;m/s) + (23&nbsp;kg)(9.81&nbsp;m/s&sup2;)(4&nbsp;s)</span><span>&asymp; 11,360&nbsp;N&middot;s</span></p>
+        <p>That already lands in the N class (10,240 to 20,480&nbsp;N&middot;s) before drag is counted. The OpenRocket model with drag agrees: on an N4000 it reaches 20,465&nbsp;ft and Mach&nbsp;1.45.</p>
+        <p>Finding one was the harder problem. Large solid motors are in short supply right now: one major manufacturer is not selling, and the other quoted a 44-week lead time. We went with Animal Motor Works, a smaller Tripoli and NAR certified manufacturer, and will fly their N4000BB (&ldquo;Blue Baboon&rdquo; propellant) in a 98&nbsp;mm case loaned by AMW. The motor needs a Level&nbsp;3 certification that nobody on the team holds yet, so an outside L3 mentor is supporting the purchase and will be on site when the motor is assembled.</p>
+      </div>
+
+      <figure class="fig reveal">
+        <img src="assets/img/frl_dizzy_ork.png" alt="OpenRocket side profile of Dizzy: 95.561 in long, 6.17 in maximum diameter, 38.2 lb without motor and 68.3 lb with motor. CG at 52.397 in and CP at 66.057 in for 2.21 cal of stability at M = 0.3. Flight summary on an N4000: apogee 20,465 ft, max velocity 466 m/s (Mach 1.445), max acceleration 173 m/s squared.">
+        <figcaption><b>Fig. 6</b> &nbsp;OpenRocket model. CG at 52.4&nbsp;in and CP at 66.1&nbsp;in give 2.21&nbsp;cal of static margin at M&nbsp;=&nbsp;0.3. Peak acceleration is 173&nbsp;m/s&sup2;.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ STRUCTURE ============ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>Structure</h2>
+      </div>
+
+      <div class="prose reveal">
+        <p>The thrust structure is kept as small as it can be: one bulkhead and two centering rings. Every part that is unique to Dizzy exists either to carry thrust into the airframe or to adapt existing Vertigo hardware to the motor section, without gluing anything to Vertigo parts that have to fly again.</p>
+      </div>
+
+      <figure class="fig reveal">
+        <img src="assets/img/frl_dizzy_exploded.png" alt="Exploded view of Dizzy, labeled aft to fore: aft centering ring, Vertigo fin can, fin can retaining ring and centering ring, red body tube, 98 mm motor case, forward retaining ring and forward bulkhead, and the unmodified Vertigo forward sections">
+        <figcaption><b>Fig. 7</b> &nbsp;Exploded view, aft to fore.</figcaption>
+      </figure>
+
+      <div class="table-wrap reveal">
+        <table class="transcript">
+          <caption>Parts unique to Dizzy</caption>
+          <thead>
+            <tr><th>Component</th><th>Purpose</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Forward bulkhead</td><td>Primary thrust member</td></tr>
+            <tr><td>Center retention bolt</td><td>Holds the motor in before launch and during recovery</td></tr>
+            <tr><td>Forward retaining ring</td><td>Couples the full Vertigo forward sections to the aft aerostructure</td></tr>
+            <tr><td>Fin can retaining ring</td><td>Couples the fin can to the body tube</td></tr>
+            <tr><td>Fin can centering ring</td><td>Centers the motor without being glued to any Vertigo hardware</td></tr>
+            <tr><td>Rear centering ring</td><td>Centers the motor at the nozzle exit plane</td></tr>
+            <tr><td>Body tube</td><td>Aerostructure around the motor</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="split split--even reveal">
+        <div class="prose">
+          <h3>Forward end: where the thrust goes in</h3>
+          <p>The forward bulkhead is the primary thrust member. It screws into the forward retaining ring and the body tube, and a single bolt through its center threads into the motor's forward closure, which holds the motor in place on the pad and under parachute. The bolt size is set by the motor case.</p>
+          <p>The forward retaining ring connects the canard section's coupler to the bulkhead. It uses screws instead of epoxy because it sits against the motor's forward closure, and every metal part touching that closure acts as a heat sink. Ten smaller screws instead of a few large ones spread the bearing load over more of the fiberglass body tube.</p>
+          <figure class="fig" style="margin-top:1.4rem; max-width: 380px;">
+            <img src="assets/img/frl_dizzy_fwd_ring.jpg" alt="CAD of the forward retaining ring: a stepped aluminum ring with two rows of radial screw holes">
+            <figcaption><b>Fig. 9</b> &nbsp;Forward retaining ring. Two rows of radial screws, one into the canard coupler and one into the body tube.</figcaption>
+          </figure>
+        </div>
+        <figure class="fig">
+          <img src="assets/img/frl_dizzy_fwd_section.png" alt="Section view of the forward end of the motor section: the motor case on the left, the center retention bolt threaded into the forward bulkhead, and the canard actuation mechanism with its bearings and shafts directly forward, with the two canards above and below">
+          <figcaption><b>Fig. 8</b> &nbsp;Forward bulkhead and retention bolt, with the canard mechanism directly ahead. Thrust passes from the motor's forward closure into the bulkhead and out to the airframe.</figcaption>
+        </figure>
+      </div>
+
+      <div class="prose reveal" style="margin-top:2.4rem;">
+        <h3>Aft end: adapting the fin can</h3>
+        <p>The fin can retaining ring is an adapter between Vertigo's existing fin can coupler and the body tube. It is screwed into the fin can coupler and the fin can centering ring at its aft end and epoxied to the body tube at its forward end. The centering ring is a close fit around the motor but not attached to it. At the nozzle, a rear centering ring keeps the motor centered and damps vibration. The aft end of the case gets hot, so that ring has to be thermally insulating; it will be turned from wood.</p>
+        <p>The body tube is reused from the team's previous vehicle, Mirage. Because the bulkhead takes the thrust at the forward end, the tube is loaded mostly in tension, from fin can drag. Drilling the radial screw holes cleanly in fiberglass needs its own tooling, which is being set up as a new-member project.</p>
+      </div>
+
+      <div class="fig-pair reveal">
+        <figure class="fig">
+          <img src="assets/img/frl_dizzy_fincan_section.png" alt="Sectional view of the joint between the fin can and the body tube: the carbon fiber fin can coupler, the aluminum fin can retaining ring, and the red body tube, with screws through the joint">
+          <figcaption><b>Fig. 10</b> &nbsp;Section through the fin can to body tube joint.</figcaption>
+        </figure>
+        <figure class="fig">
+          <img src="assets/img/frl_dizzy_aft.jpg" alt="Section view of the aft end: the motor case runs through the carbon fiber fin can, with the wooden rear centering ring at the exit plane between the fins">
+          <figcaption><b>Fig. 11</b> &nbsp;Aft end. The motor runs through the fin can to the rear centering ring.</figcaption>
+        </figure>
+        <figure class="fig">
+          <img src="assets/img/frl_dizzy_aft_ring.jpg" alt="CAD render of the rear centering ring, a thick wooden ring">
+          <figcaption><b>Fig. 12</b> &nbsp;Rear centering ring, in wood for insulation.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INTEGRATION + OPS ============ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section__head">
+        <h2>Integration and flight</h2>
+      </div>
+
+      <div class="prose reveal">
+        <p>Dizzy integrates in three sections: the full aft end with its centering rings, the motor with its bulkhead and retaining ring, and the full forward section. The motor slides into the aft end and the retaining ring screws into the fiberglass; the forward section then attaches to the retaining ring. The launch campaign doubles as a rehearsal of Vertigo's operations, from subsystem pre-assembly and travel through checkouts, countdown, and recovery. The igniter is an e-match coated in pyrogen on a 3&nbsp;ft dowel, run from a control box we are building.</p>
+      </div>
+
+      <figure class="fig reveal">
+        <img src="assets/img/frl_dizzy_integration.png" alt="Dizzy split into its three integration sections with lengths: the aft end with fin can and body tube at 53.2 in, the motor with bulkhead and retaining ring at 49.75 in, and the forward section with canards and nose cone at 43.35 in">
+        <figcaption><b>Fig. 13</b> &nbsp;The three integration sections: aft end (53.2&nbsp;in), motor with bulkhead and retainer (49.75&nbsp;in), forward section (43.35&nbsp;in). The motor section nests inside the aft end.</figcaption>
+      </figure>
+
+      <div class="split split--even reveal">
+        <div class="prose">
+          <h3>Flight profile</h3>
+          <ol class="steps">
+            <li><b>Liftoff, T+0&nbsp;s.</b> 18:1 thrust to weight off the rail.</li>
+            <li><b>Burnout, T+4.1&nbsp;s.</b> Peak velocity, about Mach&nbsp;1.45. The vehicle coasts back down through transonic on the way to apogee.</li>
+            <li><b>Apogee, T+33&nbsp;s.</b> About 20,000&nbsp;ft AGL. The parachute deploys reefed.</li>
+            <li><b>Disreef, T+224&nbsp;s.</b> At 1,000&nbsp;ft AGL the parachute opens fully.</li>
+            <li><b>Landing, T+280&nbsp;s.</b></li>
+          </ol>
+        </div>
+        <div class="prose">
+          <h3>Top risks</h3>
+          <div class="table-wrap" style="margin-top:1.2rem;">
+            <table class="transcript">
+              <thead>
+                <tr><th>Risk</th><th class="num">L</th><th class="num">C</th><th class="num">Score</th><th>Mitigation</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Forward screws tear out of the fiberglass</td><td class="num">2</td><td class="num">5</td><td class="num">10</td><td>More research on fiberglass shear strength, then bolt calcs</td></tr>
+                <tr><td>Epoxy softens from motor heat</td><td class="num">2</td><td class="num">5</td><td class="num">10</td><td>High-temperature epoxy and heat transfer calcs</td></tr>
+                <tr><td>Fin can damage on landing</td><td class="num">4</td><td class="num">2</td><td class="num">8</td><td>Mostly unavoidable; low touchdown speed helps</td></tr>
+                <tr><td>Motor case failure</td><td class="num">1</td><td class="num">5</td><td class="num">5</td><td>Flying the manufacturer's own case</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -113,13 +290,8 @@
         <h2>What comes next</h2>
       </div>
       <div class="prose narrow reveal">
-        <p>Currently I'm validating the thrust structure in Ansys Mechanical, and designing tooling for the carbon fiber layup this rocket will use as it's body. As the design passes review, gets fabricated, and flies, this page fills in: structures and recovery detail, the canard actuation and control work, and flight data against the predictions above.</p>
+        <p>Between now and preliminary design review on 30 November, the open work is bolt calculations for the forward and rear retainers, FEA on every Dizzy-specific part, heat transfer calculations from the motor case into the joints, and mass optimization of the bulkhead and fin can centering ring. After PDR come the critical design review in December, subsystem testing of the canards, recovery, avionics, and igniter in January and February alongside manufacturing, assembly in February, and a launch targeted for 27 February 2027. This page will fill in with the analysis and then with flight data against the predictions above.</p>
       </div>
-
-      <figure class="fig reveal" style="max-width: 860px;">
-        <img src="assets/img/frl_thrust_structure.jpg" alt="Exploded CAD view of the work-in-progress solid motor thrust structure: a red coupler ring, a perforated ring, and a bolted bulkhead plate ahead of the carbon fiber aft section, which carries the motor tube on standoff rods, the fins, and the tapered boattail">
-        <figcaption><b>Fig. 5</b> &nbsp;Work in progress: the solid motor thrust structure, designed to integrate with the forward sections of the full liquid vehicle.</figcaption>
-      </figure>
 
       <div class="btn-row reveal" style="margin-top:2.4rem;">
         <a class="btn btn--ghost" href="projects-coldflow.html">&larr; Cold flow test platform</a>
